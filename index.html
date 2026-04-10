@@ -3,119 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tony Photography | Bookings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <title>Tony Photography | Cinematic Reels & Shoots</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sage-green: #6b8266; 
-            --whatsapp-green: #25D366;
-            --off-white: #f8f9f7;
-            --dark-text: #2d3436;
+            --bg-black: #0a0a0a;
+            --accent-gold: #c5a059;
+            --pure-white: #ffffff;
+            --dark-gray: #1a1a1a;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Playfair Display', serif;
-            background-color: var(--sage-green);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            background-color: var(--bg-black);
+            color: var(--pure-white);
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
         }
 
-        header {
-            padding: 60px 20px 30px 20px;
+        /* Hero Section with Video Background Feel */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('your-cover-image.jpg'); /* Replace with a high-res shot */
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
         }
 
         .logo {
-            max-width: 280px;
-            height: auto;
-            margin-bottom: 15px;
+            max-width: 200px;
+            margin-bottom: 20px;
         }
 
-        .tagline {
-            font-style: italic;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            margin: 10px 0;
             text-transform: uppercase;
-            opacity: 0.8;
+            letter-spacing: -2px;
         }
 
-        .container {
-            background: white;
-            color: var(--dark-text);
-            width: 85%;
-            max-width: 600px;
-            padding: 50px 30px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            margin-top: 0;
-            color: var(--sage-green);
-        }
-
-        p {
-            line-height: 1.6;
-            font-size: 1.1rem;
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
             margin-bottom: 30px;
         }
 
-        .booking-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--whatsapp-green);
-            color: white;
-            padding: 18px 35px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        /* Services Grid - CineReelz Style */
+        .section-title {
+            text-align: center;
+            padding: 60px 20px 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
         }
 
-        .booking-btn:hover {
-            transform: scale(1.05);
-            background-color: #1ebe57;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px 10% 80px;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 40px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.3s ease, border 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .service-card h3 {
+            color: var(--accent-gold);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* The Sticky WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .cta-btn {
+            background: var(--accent-gold);
+            color: black;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 0;
+            transition: 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: white;
         }
 
         footer {
-            margin-top: auto;
-            padding: 30px;
+            text-align: center;
+            padding: 40px;
             font-size: 0.8rem;
-            letter-spacing: 1px;
-            opacity: 0.6;
+            border-top: 1px solid var(--dark-gray);
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <section class="hero">
         <img src="logo.png" alt="Tony Photography" class="logo">
-        <div class="tagline">Cinematic Digital Illustrations</div>
-    </header>
+        <p>India's Premium Cinematic Shoots</p>
+        <h1>CAPTURING THE EXTRAORDINARY</h1>
+        <a href="#booking" class="cta-btn">View Services</a>
+    </section>
 
-    <div class="container">
-        <h2>Book Your Session</h2>
-        <p>Ready to capture your cinematic story? Click the button below to message me on WhatsApp and check my current availability.</p>
-        
-        <a href="https://wa.me/919989920100?text=Hi%20Tony!%20I'd%20like%20to%20enquire%20about%20booking%20a%20photoshoot." class="booking-btn">
-            Book Now via WhatsApp
-        </a>
-    </div>
+    <div id="booking" class="section-title">Professional Services</div>
+
+    <section class="services">
+        <div class="service-card">
+            <h3>Event Reels</h3>
+            <p>Fast-paced, cinematic event coverage ready within 24 hours.</p>
+        </div>
+        <div class="service-card">
+            <h3>Portrait Shoots</h3>
+            <p>High-contrast, powerful digital illustrations and photography.</p>
+        </div>
+        <div class="service-card">
+            <h3>Commercials</h3>
+            <p>High-end visuals for brands looking for a gritty aesthetic.</p>
+        </div>
+    </section>
+
+    <a href="https://wa.me/919989920100?text=Hi%20Tony!%20I'm%20coming%20from%20your%20website%20and%20want%20to%20book%20a%20shoot." class="whatsapp-float">
+        <span>Book via WhatsApp</span>
+    </a>
 
     <footer>
-        &copy; 2026 TONY PHOTOGRAPHY | ALL RIGHTS RESERVED
+        &copy; 2026 TONY PHOTOGRAPHY | BASED IN HYDERABAD
     </footer>
 
 </body>
