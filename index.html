@@ -399,27 +399,195 @@
         </div>
     </section>
 
-    <section class="section-padding" id="coverage">
-        <h2 class="glow-title">What We <span>Cover</span></h2>
-        <div class="grid-container">
-            <div class="glass-card">
-                <h3>Personal Celebrations</h3>
-                <p>Warm, emotion-led reels for intimate milestones and moments that deserve a polished memory.</p>
-                <span class="pill pill-secondary">Birthdays</span> <span class="pill pill-secondary">Engagements</span>
-            </div>
-            <div class="glass-card featured-card">
-                <div style="background: var(--glow-green); color: #000; padding: 4px 12px; border-radius: 20px; font-weight: 900; font-size: 0.7rem; display: inline-block; margin-bottom: 15px;">★ MOST POPULAR</div>
-                <h3>Weddings & Grand Events</h3>
-                <p>Our signature category for multi-function stories, elevated edits, and crowd-moving highlights.</p>
-                <span class="pill pill-secondary">Pre-Weddings</span> <span class="pill pill-secondary">Sangeet</span>
-            </div>
-            <div class="glass-card">
-                <h3>Corporate & Public</h3>
-                <p>Professional reels for launches, campaigns, and public-facing moments that need stronger reach.</p>
-                <span class="pill pill-secondary">Launches</span> <span class="pill pill-secondary">Conferences</span>
+<style>
+    :root {
+        --bg-olive: #1b2419;
+        --glow-green: #a8ff78;
+        --glass-white: rgba(255, 255, 255, 0.04);
+        --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    .coverage-section {
+        padding: 100px 5%;
+        background-color: var(--bg-olive);
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        color: #ffffff;
+    }
+
+    .cov-label {
+        color: var(--glow-green);
+        text-transform: uppercase;
+        letter-spacing: 5px;
+        font-weight: 800;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .cov-title {
+        font-size: clamp(2.5rem, 7vw, 4.5rem);
+        font-weight: 900;
+        margin: 10px 0 20px;
+        text-transform: uppercase;
+        line-height: 1;
+    }
+
+    .cov-title span {
+        color: var(--glow-green);
+        text-shadow: 0 0 25px rgba(168, 255, 120, 0.4);
+    }
+
+    .cov-description {
+        max-width: 700px;
+        margin: 0 auto 60px;
+        opacity: 0.7;
+        line-height: 1.8;
+        font-size: 1rem;
+    }
+
+    .cov-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        max-width: 1250px;
+        margin: 0 auto;
+    }
+
+    .cov-card {
+        background: var(--glass-white);
+        border: 1px solid var(--glass-border);
+        border-radius: 40px;
+        padding: 50px 40px;
+        text-align: left;
+        position: relative;
+        transition: all 0.4s ease;
+    }
+
+    /* CENTER FEATURED CARD */
+    .cov-card.featured {
+        border: 2px solid var(--glow-green);
+        background: linear-gradient(145deg, rgba(27, 36, 25, 1) 0%, rgba(45, 61, 42, 1) 100%);
+    }
+
+    .cov-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(168, 255, 120, 0.1);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        font-size: 1.4rem;
+        border: 1px solid rgba(168, 255, 120, 0.2);
+    }
+
+    .cov-badge {
+        background: var(--glow-green);
+        color: #1b2419;
+        font-size: 0.7rem;
+        font-weight: 900;
+        padding: 8px 20px;
+        border-radius: 30px;
+        position: absolute;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+        letter-spacing: 1px;
+    }
+
+    .cov-card h3 {
+        font-size: 1.8rem;
+        margin: 0 0 15px;
+        font-weight: 800;
+    }
+
+    .cov-card p {
+        opacity: 0.7;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+
+    /* TAG PILLS */
+    .cov-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .tag-pill {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .featured .tag-pill {
+        background: rgba(168, 255, 120, 0.08);
+        border-color: rgba(168, 255, 120, 0.3);
+    }
+
+    .cov-card:hover {
+        border-color: var(--glow-green);
+        transform: translateY(-5px);
+    }
+</style>
+
+<section class="coverage-section">
+    <span class="cov-label">Coverage Map</span>
+    <h1 class="cov-title">What We <span>Cover</span></h1>
+    <p class="cov-description">
+        From intimate private milestones to high-octane public rallies, we weave professional storytelling into every frame we capture.
+    </p>
+
+    <div class="cov-grid">
+        <div class="cov-card">
+            <div class="cov-icon">🥂</div>
+            <h3>Vibe-Driven Milestones</h3>
+            <p>High-energy, aesthetic captures for your most important personal chapters and lifestyle moments.</p>
+            <div class="cov-tags">
+                <span class="tag-pill">Birthdays</span>
+                <span class="tag-pill">Baby Showers</span>
+                <span class="tag-pill">Anniversaries</span>
+                <span class="tag-pill">Housewarming</span>
+                <span class="tag-pill">Engagements</span>
             </div>
         </div>
-    </section>
+
+        <div class="cov-card featured">
+            <div class="cov-badge">★ MOST POPULAR</div>
+            <div class="cov-icon">📸</div>
+            <h3>Grand Cinematic Unions</h3>
+            <p>Our premier storytelling service for heritage weddings, featuring dramatic lighting and editorial-grade edits.</p>
+            <div class="cov-tags">
+                <span class="tag-pill">Candid Reels</span>
+                <span class="tag-pill">Films</span>
+                <span class="tag-pill">Highlights</span>
+                <span class="tag-pill">Haldi & Mehendi</span>
+                <span class="tag-pill">Sangeet</span>
+            </div>
+        </div>
+
+        <div class="cov-card">
+            <div class="cov-icon">⚡</div>
+            <h3>Impactful Brand Narrative</h3>
+            <p>Powerful visual assets for product launches and corporate identity that demand professional engagement.</p>
+            <div class="cov-tags">
+                <span class="tag-pill">Business Launches</span>
+                <span class="tag-pill">Political Rallies</span>
+                <span class="tag-pill">Brand Promotions</span>
+                <span class="tag-pill">Conferences</span>
+                <span class="tag-pill">Teasers</span>
+            </div>
+        </div>
+    </div>
+</section>
 
 </body>
 </html>
