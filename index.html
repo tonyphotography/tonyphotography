@@ -3,213 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tony Photography | Cinematic Visuals</title>
+    <title>Tony Photography | Premium Visuals</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #1b2419; 
             --glow-green: #a8ff78;
-            --glow-purple: #a878ff;
             --pure-white: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
-        body, html {
+        body {
             margin: 0;
             padding: 0;
             background-color: var(--bg-dark);
             color: var(--pure-white);
             font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
         }
 
         .section-padding { padding: 80px 5%; text-align: center; }
 
-        /* HERO SECTION */
-        .hero-container {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            max-width: 1000px;
-            margin: 100px auto 50px;
-            padding: 80px 40px;
-            text-align: center;
+        /* HERO BOX */
+        .hero-box {
+            background: rgba(0,0,0,0.3);
+            border-radius: 40px;
+            padding: 60px;
+            max-width: 900px;
+            margin: 40px auto;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
             line-height: 0.9;
             margin: 20px 0;
             text-transform: uppercase;
         }
 
-        .italic-brand {
+        .italic-sub {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            display: block;
             font-size: 0.8em;
-            text-transform: none;
+            display: block;
+        }
+
+        /* SECTION TITLES */
+        .glow-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .glow-text {
+            color: var(--glow-green);
+            text-shadow: 0 0 20px rgba(168, 255, 120, 0.6);
+        }
+
+        /* GRID SYSTEM */
+        .grid-6 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: left;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .card-num {
+            position: absolute;
+            top: 25px;
+            right: 30px;
+            font-size: 3.5rem;
+            font-weight: 900;
+            opacity: 0.1;
+        }
+
+        .pill-container { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+        .pill {
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .cta-btn {
-            background: var(--pure-white);
-            color: #000;
-            padding: 20px 45px;
+            background: white;
+            color: black;
+            padding: 18px 40px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 900;
             display: inline-block;
             margin-top: 30px;
-            box-shadow: 0 0 25px rgba(168, 255, 120, 0.5);
-            transition: 0.3s ease;
+            box-shadow: 0 0 25px var(--glow-green);
         }
 
-        .cta-btn:hover { transform: scale(1.05); background: var(--glow-green); }
-
-        /* GRID SYSTEM */
-        .grid-container {
+        /* COVERAGE BOXES */
+        .coverage-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1250px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .glass-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 40px;
-            padding: 50px 40px;
-            text-align: left;
-            position: relative;
-            transition: 0.3s ease;
-        }
-
-        .card-num {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            font-size: 4rem;
-            font-weight: 900;
-            opacity: 0.1;
-        }
-
-        .pill {
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-right: 8px;
-            margin-top: 10px;
-            display: inline-block;
-        }
-
-        /* COVERAGE SPECIFICS */
         .coverage-card {
             background: #121212;
-            border-radius: 40px;
-            padding: 60px 40px;
+            border-radius: 35px;
+            padding: 50px 30px;
             border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .featured-border { border: 2px solid var(--glow-purple); }
-        
-        .badge {
-            background: var(--glow-purple);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 900;
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        h2 span {
-            color: var(--glow-green);
-            text-shadow: 0 0 20px rgba(168, 255, 120, 0.4);
+            position: relative;
         }
     </style>
 </head>
 <body>
 
     <section class="section-padding">
-        <div class="hero-container">
-            <span style="color: #c5a059; letter-spacing: 4px; font-weight: 700; font-size: 0.8rem;">★ INDIA'S PREMIUM CINEMATIC SHOOTS</span>
-            <h1 class="hero-title">YOUR VISION,<br>OUR LENS. <span class="italic-brand">Cinematic Dreams.</span></h1>
-            <p style="opacity: 0.7; max-width: 650px; margin: 0 auto; line-height: 1.8;">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
-            <a href="#" class="cta-btn">BOOK YOUR SHOOT</a>
+        <div class="hero-box">
+            <span style="color: #c5a059; letter-spacing: 3px; font-size: 0.8rem;">★ INDIA'S PREMIUM CINEMATIC SHOOTS</span>
+            <h1 class="hero-title">YOUR VISION,<br>OUR LENS. <span class="italic-sub">Cinematic Dreams.</span></h1>
+            <p style="opacity: 0.7; max-width: 600px; margin: 0 auto;">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
+            <a href="https://www.instagram.com/tony_photography.wed?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="cta-btn">BOOK YOUR SHOOT</a>
         </div>
     </section>
 
     <section class="section-padding">
-        <h2 class="hero-title" style="font-size: 3rem;">WHY CLIENTS KEEP <span>CHOOSING US</span></h2>
-        <div class="grid-container">
-            <div class="glass-card">
+        <h2 class="glow-title">WHY CLIENTS <span class="glow-text">CHOOSE US</span></h2>
+        <div class="grid-6">
+            <div class="feature-card">
                 <span class="card-num">01</span>
                 <h3>Cinematic Edge</h3>
                 <p>Digital illustrations with a powerful movie-like aesthetic that grabs attention instantly.</p>
-                <span class="pill">Gritty Texture</span><span class="pill">Dynamic Lighting</span>
+                <div class="pill-container">
+                    <div class="pill">Gritty Texture</div>
+                    <div class="pill">Dynamic Lighting</div>
+                </div>
             </div>
-            <div class="glass-card">
+
+            <div class="feature-card">
                 <span class="card-num">02</span>
                 <h3>Precision Delivery</h3>
                 <p>Fast-paced workflows ensure your social-ready content is ready before the hype dies down.</p>
-                <span class="pill">Next-Day Delivery</span><span class="pill">Social Ready</span>
+                <div class="pill-container">
+                    <div class="pill">Next-Day Delivery</div>
+                    <div class="pill">Social Ready</div>
+                </div>
             </div>
-            <div class="glass-card">
+
+            <div class="feature-card">
                 <span class="card-num">03</span>
                 <h3>Artist's Vision</h3>
                 <p>Custom-crafted shoots designed to match your unique brand identity and personal narrative.</p>
-                <span class="pill">Custom Edits</span><span class="pill">Unique Style</span>
+                <div class="pill-container">
+                    <div class="pill">Custom Edits</div>
+                    <div class="pill">Unique Style</div>
+                </div>
             </div>
-            <div class="glass-card">
+
+            <div class="feature-card">
                 <span class="card-num">04</span>
                 <h3>Premium Gear</h3>
                 <p>High-end cinema tools ensure the highest resolution and color depth for every frame.</p>
-                <span class="pill">4K Quality</span><span class="pill">Color Grading</span>
+                <div class="pill-container">
+                    <div class="pill">4K Quality</div>
+                    <div class="pill">Color Grading</div>
+                </div>
             </div>
-            <div class="glass-card">
+
+            <div class="feature-card">
                 <span class="card-num">05</span>
                 <h3>Global Experience</h3>
                 <p>Trusted across India for grand events, weddings, and high-profile commercial projects.</p>
-                <span class="pill">Event Coverage</span><span class="pill">Grand Scale</span>
+                <div class="pill-container">
+                    <div class="pill">Event Coverage</div>
+                    <div class="pill">Grand Scale</div>
+                </div>
             </div>
-            <div class="glass-card">
+
+            <div class="feature-card">
                 <span class="card-num">06</span>
                 <h3>Story First</h3>
                 <p>We focus on the narrative, ensuring every image resonates deeply with your audience.</p>
-                <span class="pill">Storytelling</span><span class="pill">Emotional Depth</span>
+                <div class="pill-container">
+                    <div class="pill">Storytelling</div>
+                    <div class="pill">Emotional Depth</div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="section-padding">
-        <p style="color: var(--glow-purple); font-weight: 700; letter-spacing: 3px; font-size: 0.75rem; margin-bottom: 10px;">COVERAGE MAP</p>
-        <h2 class="hero-title" style="font-size: 3.5rem;">WHAT WE <span style="color: var(--glow-purple); text-shadow: none;">COVER</span></h2>
-        <p style="opacity: 0.6; margin-bottom: 60px;">From intimate celebrations to grand events, we shape every shoot around the mood.</p>
-        
-        <div class="grid-container">
-            <div class="glass-card coverage-card">
-                <h3 style="font-size: 1.8rem;">Vibe-Driven Milestones</h3>
-                <p>High-energy, aesthetic captures for your most important personal chapters and lifestyle moments.</p>
-                <span class="pill">Gala Nights</span><span class="pill">Maternity</span><span class="pill">Portraits</span>
+        <h2 class="glow-title">WHAT WE <span style="color: #a878ff;">COVER</span></h2>
+        <div class="coverage-grid">
+            <div class="coverage-card">
+                <h3>Personal Celebrations</h3>
+                <p>Warm, emotion-led reels for intimate milestones and polished memories.</p>
             </div>
-            <div class="glass-card coverage-card featured-border">
-                <div class="badge">★ MOST POPULAR</div>
-                <h3 style="font-size: 1.8rem;">Grand Cinematic Unions</h3>
-                <p>Our premier storytelling service for heritage weddings, featuring dramatic lighting and editorial-grade edits.</p>
-                <span class="pill">Candid Reels</span><span class="pill">Films</span><span class="pill">Highlights</span>
+            <div class="coverage-card" style="border: 1px solid #a878ff;">
+                <div style="background: #a878ff; color: white; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 15px; border-radius: 20px; font-size: 0.6rem; font-weight: 900;">★ MOST POPULAR</div>
+                <h3>Weddings and Grand Events</h3>
+                <p>Our signature category for multi-function stories, elevated edits, and crowd-moving highlights.</p>
             </div>
-            <div class="glass-card coverage-card">
-                <h3 style="font-size: 1.8rem;">Impactful Brand Narrative</h3>
-                <p>Powerful visual assets for product launches and corporate identity that demand professional engagement.</p>
-                <span class="pill">Teasers</span><span class="pill">Openings</span><span class="pill">Fashion</span>
+            <div class="coverage-card">
+                <h3>Corporate and Public Events</h3>
+                <p>Professional reels for launches and campaigns that need a stronger visual reach.</p>
             </div>
         </div>
     </section>
