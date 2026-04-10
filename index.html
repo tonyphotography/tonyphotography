@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tony Photography | Cinematic Visuals</title>
+    <title>Tony Photography | Premium Cinematic Visuals</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* BRAND COLORS */
+            /* BRAND IDENTITY COLORS */
             --base-sage: #6b8266; 
             --dark-sage: #2d3829;
-            --glow-green: #a8ff78; /* Your Glowing Green request */
+            --glow-green: #a8ff78; 
             --accent-gold: #c5a059;
             --pure-white: #ffffff;
+            --glass-bg: rgba(20, 25, 18, 0.75);
         }
 
         body, html {
@@ -22,10 +23,10 @@
             color: var(--pure-white);
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Ambient Glow Background Effect */
+        /* Ambient Background Glows */
         body::before {
             content: "";
             position: fixed;
@@ -36,29 +37,30 @@
             z-index: -1;
         }
 
-        /* 1. HEADER (Single Logo & Enlarged Nav) */
+        /* 1. ENLARGED HEADER & NAVIGATION */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 5%;
+            padding: 40px 5%;
             position: fixed;
             top: 0; width: 90%;
             z-index: 1000;
         }
 
         .header-logo img {
-            max-height: 70px;
+            max-height: 90px; /* Scaled up logo */
             display: block;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
         }
 
         nav {
             display: flex;
-            gap: 35px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px 45px;
+            gap: 45px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 22px 65px; /* Larger navigation bar */
             border-radius: 60px;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -67,68 +69,75 @@
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem; /* Larger font size */
             letter-spacing: 2px;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         nav a:hover {
             color: var(--glow-green);
-            text-shadow: 0 0 10px var(--glow-green);
+            text-shadow: 0 0 15px var(--glow-green);
         }
 
         .nav-book-btn {
             background-color: var(--pure-white);
             color: var(--dark-sage);
-            padding: 15px 35px;
+            padding: 22px 50px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-transform: uppercase;
             transition: 0.3s;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+
+        .nav-book-btn:hover {
+            background-color: var(--glow-green);
+            box-shadow: 0 0 30px var(--glow-green);
+            transform: scale(1.05);
         }
 
         /* 2. HERO SECTION */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding-top: 60px;
+            padding: 120px 5% 60px;
         }
 
         .hero-container {
-            background: rgba(20, 25, 18, 0.7);
+            background: var(--glass-bg);
             border: 1px solid rgba(168, 255, 120, 0.2);
-            backdrop-filter: blur(25px);
-            width: 90%;
-            max-width: 1000px;
-            padding: 90px 50px;
-            border-radius: 40px;
+            backdrop-filter: blur(25px); /* Glassmorphism effect */
+            width: 95%;
+            max-width: 1250px;
+            padding: 130px 60px;
+            border-radius: 50px;
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
         }
 
         .top-badge {
             color: var(--accent-gold);
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
+            font-size: 1rem;
+            margin-bottom: 30px;
             display: block;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-size: clamp(3.5rem, 12vw, 7.5rem); /* Massive headlines */
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
             margin: 0;
-            line-height: 1.0;
-            color: var(--glow-green);
-            text-shadow: 0 0 20px rgba(168, 255, 120, 0.6);
+            line-height: 0.95;
+            color: var(--glow-green); /* Glowing green text */
+            text-shadow: 0 0 30px rgba(168, 255, 120, 0.6);
         }
 
         .brand-text {
@@ -137,42 +146,69 @@
             font-style: italic;
             text-transform: none;
             display: block;
-            margin-top: 15px;
-            font-size: 0.8em;
+            margin-top: 25px;
+            font-size: 0.7em;
             text-shadow: none;
         }
 
-        /* 3. WHY US SECTION (CineReelz Style) */
+        .hero-sub {
+            opacity: 0.75;
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin: 45px auto;
+            max-width: 800px;
+        }
+
+        .cta-primary {
+            background-color: var(--pure-white);
+            color: var(--dark-sage);
+            padding: 25px 65px;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: 900;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+            box-shadow: 0 0 30px var(--glow-green);
+            transition: 0.3s;
+        }
+
+        .cta-primary:hover {
+            background: var(--glow-green);
+            transform: scale(1.05);
+        }
+
+        /* 3. WHY US SECTION (6 CARD GRID) */
         .why-us-section {
-            padding: 100px 5%;
+            padding: 160px 5%;
             text-align: center;
             background: #1a2218;
         }
 
         .glow-title {
-            font-size: 3rem;
+            font-size: 4.5rem;
             text-transform: uppercase;
-            margin-bottom: 50px;
+            margin-bottom: 90px;
         }
 
         .glow-title span {
             color: var(--glow-green);
-            text-shadow: 0 0 15px var(--glow-green);
+            text-shadow: 0 0 25px var(--glow-green);
         }
 
         .why-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 45px;
+            max-width: 1450px;
             margin: 0 auto;
         }
 
         .why-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 35px;
+            padding: 55px;
             text-align: left;
             position: relative;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -180,47 +216,42 @@
 
         .why-card:hover {
             border-color: var(--glow-green);
-            background: rgba(168, 255, 120, 0.05);
-            transform: translateY(-10px);
+            background: rgba(168, 255, 120, 0.06);
+            transform: translateY(-20px);
         }
 
         .card-num {
             position: absolute;
-            top: 20px; right: 30px;
-            font-size: 2.5rem;
+            top: 30px; right: 40px;
+            font-size: 3.5rem;
             font-weight: 900;
             opacity: 0.1;
         }
 
+        .why-card h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .why-card p {
+            font-size: 1.15rem;
+            opacity: 0.7;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
         .keyword-pill {
             display: inline-block;
-            background: rgba(255,255,255,0.05);
-            padding: 5px 15px;
+            background: rgba(255,255,255,0.06);
+            padding: 10px 22px;
             border-radius: 50px;
-            font-size: 0.7rem;
+            font-size: 0.85rem;
             font-weight: 800;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin: 5px 5px 0 0;
+            margin: 6px 6px 0 0;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
-        .cta-btn {
-            background-color: var(--pure-white);
-            color: var(--dark-sage);
-            padding: 20px 45px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 900;
-            display: inline-block;
-            margin-top: 40px;
-            text-transform: uppercase;
-            box-shadow: 0 0 20px var(--glow-green);
-            transition: 0.3s;
-        }
-
-        .cta-btn:hover { background: var(--glow-green); }
-
     </style>
 </head>
 <body>
@@ -241,34 +272,61 @@
         <div class="hero-container">
             <span class="top-badge">★ India's Premium Cinematic Shoots</span>
             <h1>YOUR VISION, <br> OUR LENS. <span class="brand-text">Cinematic Dreams.</span></h1>
-            <p style="opacity: 0.7; line-height: 1.8; margin: 30px 0;">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
-            <a href="https://wa.me/919989920100" class="cta-btn">Book Your Shoot</a>
+            <p class="hero-sub">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
+            <a href="https://wa.me/919989920100" class="cta-primary">Book Your Shoot</a>
         </div>
     </main>
 
     <section class="why-us-section" id="why-us">
         <h2 class="glow-title">Why Clients Keep <span>Choosing Us</span></h2>
+        
         <div class="why-grid">
             <div class="why-card">
                 <div class="card-num">01</div>
                 <h3>Cinematic Edge</h3>
-                <p>We create digital illustrations with a powerful movie-like aesthetic.</p>
+                <p>We create digital illustrations with a powerful movie-like aesthetic that grabs attention.</p>
                 <span class="keyword-pill">Gritty Texture</span>
                 <span class="keyword-pill">Dynamic Lighting</span>
             </div>
+            
             <div class="why-card">
                 <div class="card-num">02</div>
                 <h3>Precision Delivery</h3>
-                <p>Fast workflows ensure your premium content is ready without the wait.</p>
+                <p>Fast workflows ensure your premium social-ready content is ready without the wait.</p>
                 <span class="keyword-pill">Next-Day Delivery</span>
                 <span class="keyword-pill">Social Ready</span>
             </div>
+            
             <div class="why-card">
                 <div class="card-num">03</div>
                 <h3>Artist’s Vision</h3>
-                <p>Custom-crafted shoots to match your unique brand identity.</p>
+                <p>Custom-crafted shoots designed to match your unique brand identity and personal style.</p>
                 <span class="keyword-pill">Custom Edits</span>
                 <span class="keyword-pill">Unique Style</span>
+            </div>
+
+            <div class="why-card">
+                <div class="card-num">04</div>
+                <h3>Premium Gear</h3>
+                <p>Utilizing high-end cinema tools to ensure the highest resolution and color depth for every project.</p>
+                <span class="keyword-pill">4K Quality</span>
+                <span class="keyword-pill">Color Grading</span>
+            </div>
+
+            <div class="why-card">
+                <div class="card-num">05</div>
+                <h3>Global Experience</h3>
+                <p>Trusted by clients across India for grand events, weddings, and high-profile commercial shoots.</p>
+                <span class="keyword-pill">Event Coverage</span>
+                <span class="keyword-pill">Grand Scale</span>
+            </div>
+
+            <div class="why-card">
+                <div class="card-num">06</div>
+                <h3>Story First</h3>
+                <p>We focus on the narrative, ensuring every image tells a story that resonates with your audience.</p>
+                <span class="keyword-pill">Storytelling</span>
+                <span class="keyword-pill">Emotional Depth</span>
             </div>
         </div>
     </section>
