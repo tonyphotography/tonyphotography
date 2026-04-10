@@ -7,7 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sage-green: #6b8266; /* Matching your logo background */
+            --sage-green: #6b8266; 
+            --whatsapp-green: #25D366;
             --off-white: #f8f9f7;
             --dark-text: #2d3436;
         }
@@ -25,64 +26,75 @@
         }
 
         header {
-            padding: 50px 20px;
+            padding: 60px 20px 30px 20px;
             text-align: center;
         }
 
         .logo {
-            max-width: 250px;
+            max-width: 280px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .tagline {
             font-style: italic;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .container {
             background: white;
             color: var(--dark-text);
-            width: 90%;
-            max-width: 800px;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 85%;
+            max-width: 600px;
+            padding: 50px 30px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             text-align: center;
-            margin-bottom: 50px;
+            margin-top: 20px;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            margin-top: 0;
+            color: var(--sage-green);
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
         }
 
         .booking-btn {
-            display: inline-block;
-            background-color: var(--sage-green);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--whatsapp-green);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 35px;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
             border-radius: 50px;
-            transition: transform 0.3s ease, background 0.3s ease;
-            margin-top: 20px;
-            border: none;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         .booking-btn:hover {
-            transform: translateY(-3px);
-            background-color: #5a6e56;
+            transform: scale(1.05);
+            background-color: #1ebe57;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
         }
 
         footer {
             margin-top: auto;
-            padding: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
+            padding: 30px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -90,18 +102,20 @@
 
     <header>
         <img src="logo.png" alt="Tony Photography" class="logo">
-        <div class="tagline">Cinematic. Gritty. Powerful.</div>
+        <div class="tagline">Cinematic Digital Illustrations</div>
     </header>
 
     <div class="container">
-        <h2>Reserve Your Session</h2>
-        <p>Book a cinematic shoot with Tony. Select a date and time that works for you below.</p>
+        <h2>Book Your Session</h2>
+        <p>Ready to capture your cinematic story? Click the button below to message me on WhatsApp and check my current availability.</p>
         
-        <a href="https://calendly.com/your-profile" class="booking-btn">View Availability</a>
+        <a href="https://wa.me/919989920100?text=Hi%20Tony!%20I'd%20like%20to%20enquire%20about%20booking%20a%20photoshoot." class="booking-btn">
+            Book Now via WhatsApp
+        </a>
     </div>
 
     <footer>
-        &copy; 2026 Tony Photography. All rights reserved.
+        &copy; 2026 TONY PHOTOGRAPHY | ALL RIGHTS RESERVED
     </footer>
 
 </body>
