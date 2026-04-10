@@ -3,69 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tony Photography | Premium Cinematic Visuals</title>
+    <title>Tony Photography | Cinematic Visuals</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
             /* YOUR BRAND COLORS */
-            --main-bg: #6b8266; /* Your brand sage green from the logo */
-            
-            /* CineReelz Style Accents & Overlays */
-            --overlay-glass: rgba(10, 10, 10, 0.4); /* Translucent overlay for text readability */
+            --main-sage: #6b8266; 
+            --dark-sage: #4a5a47; /* Darker version for the glass box */
+            --accent-gold: #c5a059;
             --pure-white: #ffffff;
-            --accent-purple: #c300f9; /* CineReelz specific glowing purple accent */
-            --accent-gold: #c5a059; /* For the small tagline */
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            background-color: var(--main-bg);
+            background-color: var(--main-sage);
             color: var(--pure-white);
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
             height: 100%;
-            overflow-x: hidden;
         }
 
-        /* 1. THE ADVANCED HEADER (CineReelz Layout) */
+        /* 1. HEADER - SINGLE LOGO & NAV */
         header {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             padding: 20px 5%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0));
             position: fixed;
             top: 0;
             width: 90%;
             z-index: 1000;
         }
 
-        .header-logos {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-logos img {
-            max-height: 40px;
+        .header-logo img {
+            max-height: 50px; /* Adjusted for single logo visibility */
             display: block;
         }
 
-        .header-logos .divider {
-            color: rgba(255,255,255,0.4);
-            font-weight: 300;
-        }
-
         nav {
-            grid-column: 2;
             display: flex;
             gap: 25px;
-            background: rgba(255,255,255,0.05);
+            background: rgba(0, 0, 0, 0.1);
             padding: 12px 30px;
             border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav a {
@@ -75,167 +58,119 @@
             font-weight: 700;
             font-size: 0.8rem;
             letter-spacing: 1px;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--accent-gold);
-        }
-
-        .header-cta {
-            grid-column: 3;
-            justify-self: end;
         }
 
         .nav-book-btn {
-            background-color: var(--accent-purple);
-            color: white;
-            padding: 12px 30px;
+            background-color: var(--pure-white);
+            color: var(--main-sage);
+            padding: 12px 25px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(195, 0, 249, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: 0.3s;
         }
 
         .nav-book-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(195, 0, 249, 0.6);
+            background-color: var(--accent-gold);
+            color: white;
         }
 
-        /* 2. THE BACKGROUND (Multi-Column Image Layout) */
-        .background-grid {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            padding: 10px;
-            opacity: 0.15; /* Makes images subtle but present */
-            filter: grayscale(100%); /* Adds the serious, professional CineReelz vibe */
-            z-index: 1;
-        }
-
-        .bg-img {
-            background-size: cover;
-            background-position: center;
-            height: 100%;
-        }
-
-        /* Apply a subtle color tint from your brand */
-        .color-tint-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(107, 130, 102, 0.1); /* Subtle Brand Sage Green wash */
-            z-index: 2;
-        }
-
-        /* 3. THE HERO "GLASS" SECTION (Frost Overlay) */
+        /* 2. HERO SECTION - GLASSMORPHISM */
         .hero {
             height: 100vh;
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            padding: 0 5%;
         }
 
         .hero-container {
-            background: var(--overlay-glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px); /* This creates the "Glass" effect */
-            width: 85%;
+            background: rgba(45, 56, 41, 0.6); /* Translucent dark sage */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            width: 100%;
             max-width: 900px;
-            padding: 70px 60px;
-            border-radius: 20px;
+            padding: 80px 40px;
+            border-radius: 30px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            margin-top: 80px; /* Space for fixed header */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
         }
 
         .top-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.05);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 700;
             color: var(--accent-gold);
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            display: block;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 4.8rem);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: -2px;
             margin: 0;
-            line-height: 1.0;
+            line-height: 1.1;
         }
 
-        .hero h1 .purple-text {
-            color: var(--accent-purple);
-            font-style: italic; /* Added serif italic style here */
+        /* REMOVED PURPLE: Now uses your logo's white-serif style */
+        .brand-text {
+            color: var(--pure-white);
             font-family: 'Playfair Display', serif;
+            font-style: italic;
+            text-transform: capitalize;
+            display: block;
+            margin-top: 10px;
         }
 
         .hero-sub {
             font-size: 1.1rem;
             color: rgba(255,255,255,0.8);
-            margin: 40px 0 50px;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
+            margin: 30px auto;
+            max-width: 600px;
+            line-height: 1.6;
         }
 
-        .hero-btns {
+        /* 3. BUTTONS */
+        .btn-group {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             justify-content: center;
         }
 
-        .cta-btn {
-            padding: 18px 45px;
+        .cta-main {
+            background-color: var(--pure-white);
+            color: var(--main-sage);
+            padding: 18px 40px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 900;
             text-transform: uppercase;
-            font-size: 1rem;
-            transition: all 0.3s;
+            transition: 0.3s;
         }
 
-        .cta-primary {
-            background-color: var(--accent-purple);
+        .cta-main:hover {
+            background-color: var(--accent-gold);
             color: white;
-            box-shadow: 0 0 15px rgba(195, 0, 249, 0.4);
+            transform: translateY(-3px);
         }
 
-        .cta-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(195, 0, 249, 0.6);
-        }
-
-        .cta-secondary {
-            background: rgba(255,255,255,0.05);
+        .cta-outline {
+            border: 1px solid rgba(255,255,255,0.3);
             color: white;
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        .cta-secondary:hover {
+        .cta-outline:hover {
             background: rgba(255,255,255,0.1);
         }
 
@@ -244,9 +179,7 @@
 <body>
 
     <header>
-        <div class="header-logos">
-            <img src="logo.png" alt="Logo 1">
-            <div class="divider">x</div>
+        <div class="header-logo">
             <img src="logo.png" alt="Tony Photography">
         </div>
         
@@ -258,39 +191,26 @@
             <a href="#">Contact</a>
         </nav>
         
-        <div class="header-cta">
-            <a href="https://wa.me/919989920100" class="nav-book-btn">Book Now</a>
-        </div>
+        <a href="https://wa.me/919989920100" class="nav-book-btn">Book Now</a>
     </header>
-
-    <section class="background-grid">
-        <div class="bg-img" style="background-image: url('sample1.jpg');"></div>
-        <div class="bg-img" style="background-image: url('sample2.jpg');"></div>
-        <div class="bg-img" style="background-image: url('sample3.jpg');"></div>
-        <div class="bg-img" style="background-image: url('sample4.jpg');"></div>
-    </section>
-    
-    <div class="color-tint-overlay"></div>
 
     <main class="hero">
         <div class="hero-container">
-            <div class="top-badge">
-                ★ INDIA'S PREMIUM CINEMATIC SHOOOTS
-            </div>
+            <span class="top-badge">★ India's Premium Cinematic Shoots</span>
             
             <h1>
-                YOUR VISION, <br> OUR LENS. <br>
-                <span class="purple-text">CINEMATIC DREAMS.</span>
+                Your Vision, <br> Our Lens. 
+                <span class="brand-text">Cinematic Dreams.</span>
             </h1>
             
             <p class="hero-sub">
-                Step into the extraordinary. Specializing in high-contrast digital illustrations and photography, 
-                defining grit and dynamic lighting for weddings, commercials, and events.
+                Specializing in high-contrast digital illustrations and photography, 
+                defining grit and dynamic lighting for weddings and commercial events.
             </p>
             
-            <div class="hero-btns">
-                <a href="https://wa.me/919989920100" class="cta-btn cta-primary">Book Your Shoot</a>
-                <a href="#samples" class="cta-btn cta-secondary">View Samples</a>
+            <div class="btn-group">
+                <a href="https://wa.me/919989920100" class="cta-main">Book Your Shoot</a>
+                <a href="#" class="cta-outline">View Samples</a>
             </div>
         </div>
     </main>
