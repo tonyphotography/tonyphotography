@@ -10,7 +10,7 @@
             /* BRAND COLORS */
             --base-sage: #6b8266; 
             --dark-sage: #2d3829;
-            --glow-green: #a8ff78; /* Vibrant lime green for the text glow */
+            --glow-green: #a8ff78; /* Your Glowing Green request */
             --accent-gold: #c5a059;
             --pure-white: #ffffff;
         }
@@ -18,49 +18,45 @@
         body, html {
             margin: 0;
             padding: 0;
-            /* GLOWING BACKGROUND EFFECT */
             background: radial-gradient(circle at 50% 50%, #4a5a47 0%, #2d3829 100%);
             color: var(--pure-white);
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
         }
 
-        /* Ambient glowing spots in the background */
+        /* Ambient Glow Background Effect */
         body::before {
             content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 80% 20%, rgba(168, 255, 120, 0.1) 0%, transparent 40%),
-                        radial-gradient(circle at 20% 80%, rgba(168, 255, 120, 0.1) 0%, transparent 40%);
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at 80% 20%, rgba(168, 255, 120, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 20% 80%, rgba(168, 255, 120, 0.08) 0%, transparent 40%);
             z-index: -1;
         }
 
-        /* HEADER - ENLARGED */
+        /* 1. HEADER (Single Logo & Enlarged Nav) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 30px 5%; /* Increased padding */
+            padding: 30px 5%;
             position: fixed;
-            top: 0;
-            width: 90%;
+            top: 0; width: 90%;
             z-index: 1000;
         }
 
         .header-logo img {
-            max-height: 70px; /* Bigger logo */
+            max-height: 70px;
             display: block;
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
         }
 
         nav {
             display: flex;
-            gap: 35px; /* More space between links */
+            gap: 35px;
             background: rgba(0, 0, 0, 0.3);
-            padding: 15px 45px; /* Larger nav bar */
+            padding: 15px 45px;
             border-radius: 60px;
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -71,7 +67,7 @@
             text-decoration: none;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 1rem; /* Bigger text */
+            font-size: 1rem;
             letter-spacing: 2px;
             transition: 0.3s;
         }
@@ -90,17 +86,10 @@
             font-weight: 900;
             font-size: 1rem;
             text-transform: uppercase;
-            box-shadow: 0 0 20px rgba(255,255,255,0.2);
             transition: 0.3s;
         }
 
-        .nav-book-btn:hover {
-            background-color: var(--glow-green);
-            box-shadow: 0 0 30px var(--glow-green);
-            transform: scale(1.05);
-        }
-
-        /* HERO CONTAINER */
+        /* 2. HERO SECTION */
         .hero {
             height: 100vh;
             display: flex;
@@ -110,7 +99,7 @@
         }
 
         .hero-container {
-            background: rgba(20, 25, 18, 0.7); /* Darker frost for depth */
+            background: rgba(20, 25, 18, 0.7);
             border: 1px solid rgba(168, 255, 120, 0.2);
             backdrop-filter: blur(25px);
             width: 90%;
@@ -119,7 +108,6 @@
             border-radius: 40px;
             text-align: center;
             box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            position: relative;
         }
 
         .top-badge {
@@ -132,7 +120,6 @@
             display: block;
         }
 
-        /* GLOWING GREEN MAIN TEXT */
         .hero h1 {
             font-size: clamp(3rem, 10vw, 5.5rem);
             font-weight: 900;
@@ -141,9 +128,7 @@
             margin: 0;
             line-height: 1.0;
             color: var(--glow-green);
-            /* THE GLOW EFFECT */
-            text-shadow: 0 0 20px rgba(168, 255, 120, 0.6), 
-                         0 0 40px rgba(168, 255, 120, 0.3);
+            text-shadow: 0 0 20px rgba(168, 255, 120, 0.6);
         }
 
         .brand-text {
@@ -154,99 +139,139 @@
             display: block;
             margin-top: 15px;
             font-size: 0.8em;
-            text-shadow: none; /* Keeps "Cinematic Dreams" clean white */
+            text-shadow: none;
         }
 
-        .hero-sub {
-            font-size: 1.2rem;
-            color: rgba(255,255,255,0.7);
-            margin: 40px auto;
-            max-width: 700px;
-            line-height: 1.8;
+        /* 3. WHY US SECTION (CineReelz Style) */
+        .why-us-section {
+            padding: 100px 5%;
+            text-align: center;
+            background: #1a2218;
         }
 
-        /* BUTTONS */
-        .btn-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
+        .glow-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 50px;
         }
 
-        .cta-main {
+        .glow-title span {
+            color: var(--glow-green);
+            text-shadow: 0 0 15px var(--glow-green);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: left;
+            position: relative;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .why-card:hover {
+            border-color: var(--glow-green);
+            background: rgba(168, 255, 120, 0.05);
+            transform: translateY(-10px);
+        }
+
+        .card-num {
+            position: absolute;
+            top: 20px; right: 30px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            opacity: 0.1;
+        }
+
+        .keyword-pill {
+            display: inline-block;
+            background: rgba(255,255,255,0.05);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 5px 5px 0 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cta-btn {
             background-color: var(--pure-white);
             color: var(--dark-sage);
             padding: 20px 45px;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 900;
+            display: inline-block;
+            margin-top: 40px;
             text-transform: uppercase;
-            font-size: 1.1rem;
             box-shadow: 0 0 20px var(--glow-green);
             transition: 0.3s;
         }
 
-        .cta-main:hover {
-            background-color: var(--glow-green);
-            transform: scale(1.05);
-        }
-
-        .cta-outline {
-            border: 2px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 20px 45px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 1.1rem;
-            transition: 0.3s;
-        }
-
-        .cta-outline:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: white;
-        }
+        .cta-btn:hover { background: var(--glow-green); }
 
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-logo">
-            <img src="logo.png" alt="Tony Photography">
-        </div>
-        
+        <div class="header-logo"><img src="logo.png" alt="Tony Photography"></div>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">Why Us</a>
-            <a href="#">Packages</a>
-            <a href="#">Samples</a>
-            <a href="#">Contact</a>
+            <a href="#home">Home</a>
+            <a href="#why-us">Why Us</a>
+            <a href="#packages">Packages</a>
+            <a href="#samples">Samples</a>
+            <a href="#contact">Contact</a>
         </nav>
-        
         <a href="https://wa.me/919989920100" class="nav-book-btn">Book Now</a>
     </header>
 
-    <main class="hero">
+    <main class="hero" id="home">
         <div class="hero-container">
             <span class="top-badge">★ India's Premium Cinematic Shoots</span>
-            
-            <h1>
-                YOUR VISION, <br> OUR LENS. 
-                <span class="brand-text">Cinematic Dreams.</span>
-            </h1>
-            
-            <p class="hero-sub">
-                Specializing in high-contrast digital illustrations and photography, 
-                defining grit and dynamic lighting for weddings and commercial events.
-            </p>
-            
-            <div class="btn-group">
-                <a href="https://wa.me/919989920100" class="cta-main">Book Your Shoot</a>
-                <a href="#" class="cta-outline">View Samples</a>
-            </div>
+            <h1>YOUR VISION, <br> OUR LENS. <span class="brand-text">Cinematic Dreams.</span></h1>
+            <p style="opacity: 0.7; line-height: 1.8; margin: 30px 0;">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
+            <a href="https://wa.me/919989920100" class="cta-btn">Book Your Shoot</a>
         </div>
     </main>
+
+    <section class="why-us-section" id="why-us">
+        <h2 class="glow-title">Why Clients Keep <span>Choosing Us</span></h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="card-num">01</div>
+                <h3>Cinematic Edge</h3>
+                <p>We create digital illustrations with a powerful movie-like aesthetic.</p>
+                <span class="keyword-pill">Gritty Texture</span>
+                <span class="keyword-pill">Dynamic Lighting</span>
+            </div>
+            <div class="why-card">
+                <div class="card-num">02</div>
+                <h3>Precision Delivery</h3>
+                <p>Fast workflows ensure your premium content is ready without the wait.</p>
+                <span class="keyword-pill">Next-Day Delivery</span>
+                <span class="keyword-pill">Social Ready</span>
+            </div>
+            <div class="why-card">
+                <div class="card-num">03</div>
+                <h3>Artist’s Vision</h3>
+                <p>Custom-crafted shoots to match your unique brand identity.</p>
+                <span class="keyword-pill">Custom Edits</span>
+                <span class="keyword-pill">Unique Style</span>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>
