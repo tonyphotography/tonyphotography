@@ -589,126 +589,123 @@
     </div>
 </section>
 
-    <style>
+  <style>
     .work-section {
-        padding: 120px 5%;
+        padding: 100px 5%;
         background-color: #1b2419; /* Your Dark Olive */
         text-align: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        font-family: 'Montserrat', sans-serif;
     }
 
     .work-container {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 60px 40px;
+        padding: 80px 40px;
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid rgba(168, 255, 120, 0.1);
-        border-radius: 50px;
+        border-radius: 60px;
         position: relative;
-        overflow: hidden;
     }
 
-    /* Subtle background glow effect */
-    .work-container::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(168, 255, 120, 0.03) 0%, transparent 70%);
-        pointer-events: none;
+    /* Logo Styling */
+    .brand-logo {
+        width: 120px; /* Adjust size as needed */
+        height: auto;
+        margin-bottom: 20px;
+        filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(60deg); /* This tints your logo to match Glow Green */
     }
 
     .work-label {
-        color: var(--glow-green);
+        color: #a8ff78;
         text-transform: uppercase;
-        letter-spacing: 6px;
+        letter-spacing: 8px;
         font-weight: 800;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         display: block;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .work-title {
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
         font-weight: 900;
         text-transform: uppercase;
-        margin-bottom: 25px;
-        line-height: 1.1;
+        margin: 0;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .work-subtitle {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        font-size: clamp(1.8rem, 4vw, 3rem);
+        color: rgba(255, 255, 255, 0.8);
+        margin: 15px 0 30px;
+        font-weight: 400;
+    }
+
+    .work-text {
+        max-width: 650px;
+        margin: 0 auto 45px;
+        opacity: 0.6;
+        font-size: 1.1rem;
+        line-height: 1.8;
         color: #ffffff;
     }
 
-    .work-title span {
-        font-family: 'Playfair Display', serif;
-        text-transform: none;
-        font-style: italic;
-        font-weight: 400;
-        display: block;
-        font-size: 0.7em;
-        opacity: 0.8;
-        margin-top: 10px;
-    }
-
-    .work-description {
-        max-width: 600px;
-        margin: 0 auto 40px;
-        opacity: 0.6;
-        font-size: 1.1rem;
-        line-height: 1.6;
-    }
-
-    .instagram-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 15px;
-        background: #a8ff78; /* Your Glow Green */
-        color: #1b2419; /* Dark Olive Text */
-        padding: 22px 50px;
+    .insta-btn {
+        display: inline-block;
+        background: #a8ff78; /* Glow Green */
+        color: #1b2419;
+        padding: 20px 50px;
         border-radius: 50px;
         text-decoration: none;
         font-weight: 900;
-        font-size: 1rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 10px 30px rgba(168, 255, 120, 0.3);
+        transition: 0.3s ease;
+        box-shadow: 0 0 30px rgba(168, 255, 120, 0.3);
     }
 
-    .instagram-btn:hover {
+    .insta-btn:hover {
         transform: scale(1.05);
-        box-shadow: 0 15px 40px rgba(168, 255, 120, 0.5);
         background: #ffffff;
+        box-shadow: 0 0 40px rgba(168, 255, 120, 0.5);
     }
 
-    .handle-text {
+    .handle-link {
         display: block;
-        margin-top: 20px;
-        font-size: 0.9rem;
-        font-weight: 700;
+        margin-top: 25px;
         color: #a8ff78;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 0.9rem;
         opacity: 0.8;
     }
 </style>
 
 <section class="work-section">
     <div class="work-container">
-        <span class="work-label">Portfolio</span>
-        <h2 class="work-title">Check My Work <span>Latest Cinematic Drops</span></h2>
+        <img src="logo.png" alt="Tony Photography Logo" class="brand-logo">
         
-        <p class="work-description">
+        <span class="work-label">Portfolio</span>
+        
+        <h2 class="work-title">Check My Work</h2>
+        <h3 class="work-subtitle">Latest Cinematic Drops</h3>
+        
+        <p class="work-text">
             Experience the full gallery of high-contrast visuals, raw emotions, and gritty textures updated daily on our official feed.
         </p>
 
         <a href="https://www.instagram.com/tony_photography.wed?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-           class="instagram-btn" 
+           class="insta-btn" 
            target="_blank">
             View on Instagram
         </a>
 
-        <span class="handle-text">@tony_photography.wed</span>
+        <a href="https://www.instagram.com/tony_photography.wed" class="handle-link">
+            @tony_photography.wed
+        </a>
     </div>
 </section>
-
 </body>
 </html>
