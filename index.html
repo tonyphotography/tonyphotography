@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tony Photography | Cinematic Reels & Shoots</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-black: #0a0a0a;
-            --accent-gold: #c5a059;
-            --pure-white: #ffffff;
-            --dark-gray: #1a1a1a;
+            /* YOUR BRAND COLORS */
+            --sage-green: #6b8266; /* Main Background Color from your logo */
+            
+            /* Complementary/Accent Colors */
+            --bg-darker-sage: #5a6e56; /* For subtly darker backgrounds like service cards */
+            --accent-gold: #c5a059; /* Modern accent (from CineReelz style) */
+            --pure-white: #ffffff; /* For high-contrast text */
+            --translucent-black: rgba(0,0,0,0.5); /* For overlays */
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-black);
+            /* PRIMARY CHANGE: Main background is your Brand Sage Green */
+            background-color: var(--sage-green);
             color: var(--pure-white);
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
         }
 
-        /* Hero Section with Video Background Feel */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -30,111 +35,133 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('your-cover-image.jpg'); /* Replace with a high-res shot */
+            /* Using a photo overlay here makes the hero stand out, but with a color wash */
+            background: linear-gradient(var(--translucent-black), var(--translucent-black)), url('your-cover-image.jpg'); /* Replace with a high-res shot */
             background-size: cover;
             background-position: center;
             padding: 20px;
         }
 
         .logo {
-            max-width: 200px;
-            margin-bottom: 20px;
+            max-width: 250px;
+            height: auto;
+            margin-bottom: 25px;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 900;
             margin: 10px 0;
             text-transform: uppercase;
             letter-spacing: -2px;
+            color: var(--pure-white);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--accent-gold);
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            font-weight: 700;
         }
 
-        /* Services Grid - CineReelz Style */
+        /* Services Grid */
         .section-title {
             text-align: center;
-            padding: 60px 20px 20px;
+            padding: 70px 20px 20px;
             font-size: 2rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
         }
 
         .services {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 40px 10% 80px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 40px 8% 100px;
         }
 
         .service-card {
-            background: var(--dark-gray);
-            padding: 40px;
-            border-radius: 5px;
+            /* Modified to use a slightly darker sage, or translucent white, for depth */
+            background: var(--bg-darker-sage);
+            padding: 50px 40px;
+            border-radius: 8px;
             text-align: center;
-            transition: transform 0.3s ease, border 0.3s ease;
-            border: 1px solid transparent;
+            transition: transform 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             border: 1px solid var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
         .service-card h3 {
             color: var(--accent-gold);
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            font-weight: 700;
         }
 
-        /* The Sticky WhatsApp Button */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: #25d366;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
+        .service-card p {
+            line-height: 1.7;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-
+        /* Buttons & CTAs */
         .cta-btn {
             background: var(--accent-gold);
             color: black;
-            padding: 15px 40px;
+            padding: 16px 45px;
             text-decoration: none;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
-            border-radius: 0;
-            transition: 0.3s;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
         }
 
         .cta-btn:hover {
             background: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sticky WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366; /* Standard WhatsApp Green, recognizable */
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
         footer {
             text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            border-top: 1px solid var(--dark-gray);
+            padding: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
         }
     </style>
 </head>
@@ -142,34 +169,34 @@
 
     <section class="hero">
         <img src="logo.png" alt="Tony Photography" class="logo">
-        <p>India's Premium Cinematic Shoots</p>
-        <h1>CAPTURING THE EXTRAORDINARY</h1>
-        <a href="#booking" class="cta-btn">View Services</a>
+        <p>Premium Cinematic Digital Illustrations</p>
+        <h1>CAPTURING THE POWERFUL</h1>
+        <a href="#booking" class="cta-btn">Services & Booking</a>
     </section>
 
-    <div id="booking" class="section-title">Professional Services</div>
+    <div id="booking" class="section-title">WHAT WE DO</div>
 
     <section class="services">
         <div class="service-card">
-            <h3>Event Reels</h3>
-            <p>Fast-paced, cinematic event coverage ready within 24 hours.</p>
-        </div>
-        <div class="service-card">
             <h3>Portrait Shoots</h3>
-            <p>High-contrast, powerful digital illustrations and photography.</p>
+            <p>High-contrast, powerful digital illustrations that tell your story with intense emotion and cinematic dynamic lighting.</p>
         </div>
         <div class="service-card">
-            <h3>Commercials</h3>
-            <p>High-end visuals for brands looking for a gritty aesthetic.</p>
+            <h3>Event Reels</h3>
+            <p>Fast-paced, gritty event coverage designed for modern consumption, delivered to you within 24 hours.</p>
+        </div>
+        <div class="service-card">
+            <h3>Commercial Visuals</h3>
+            <p>High-end cinematic visuals for brands looking to differentiate themselves with a strong, dramatic aesthetic.</p>
         </div>
     </section>
 
-    <a href="https://wa.me/919989920100?text=Hi%20Tony!%20I'm%20coming%20from%20your%20website%20and%20want%20to%20book%20a%20shoot." class="whatsapp-float">
-        <span>Book via WhatsApp</span>
+    <a href="https://wa.me/919989920100?text=Hi%20Tony!%20I'm%20interested%20in%20discussing%20a%20cinematic%20shoot." class="whatsapp-float">
+        <span>Enquire via WhatsApp</span>
     </a>
 
     <footer>
-        &copy; 2026 TONY PHOTOGRAPHY | BASED IN HYDERABAD
+        &copy; 2026 TONY PHOTOGRAPHY | ALL RIGHTS RESERVED | BASED IN INDIA
     </footer>
 
 </body>
