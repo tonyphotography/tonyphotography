@@ -950,7 +950,13 @@
     }
 
     /* MENU PANEL */
+.mobile-nav {
+    display: none; /* hide by default on PC */
+}
+
+@media (max-width: 600px) {
     .mobile-nav {
+        display: none;
         position: fixed;
         top: 80px;
         left: 50%;
@@ -960,8 +966,6 @@
         backdrop-filter: blur(20px);
         border-radius: 20px;
         padding: 20px;
-
-        display: none;
         flex-direction: column;
         gap: 15px;
         z-index: 1000;
@@ -970,6 +974,7 @@
     .mobile-nav.active {
         display: flex;
     }
+}
 
     .mobile-nav a {
         color: white;
