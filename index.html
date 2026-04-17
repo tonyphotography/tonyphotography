@@ -1016,60 +1016,72 @@ window.onload = function() {
 
 };
 </script>
-    <style>
+<style>
 @media (max-width: 600px) {
 
-    /* Make header a flex row and align items */
     header {
+        position: fixed !important;
+        top: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 92% !important;
+        padding: 10px 15px !important;
+        border-radius: 50px !important;
+        background: rgba(0,0,0,0.6) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
-        gap: 8px;
     }
 
-    /* Keep logo on left */
+    /* hide nav */
+    nav {
+        display: none !important;
+    }
+
+    /* LOGO LEFT */
     .header-logo {
         margin-right: auto !important;
     }
 
-    /* Place MENU before Book Now */
-    .mobile-menu {
-        order: 2 !important;   /* 👈 key */
-        position: static !important;
-        margin-left: auto !important;
+    /* BOOK BUTTON RIGHT */
+    .nav-book-btn {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        padding: 8px 14px !important;
+        font-size: 0.7rem !important;
+    }
 
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
+    /* 🔥 MENU FIXED POSITION */
+    .mobile-menu {
+        position: absolute !important;
+        right: 80px !important;   /* 👈 adjust gap here */
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        background: rgba(255,255,255,0.08) !important;
+
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 4px !important;
     }
 
     .mobile-menu span {
         width: 18px;
         height: 2px;
-        background: #fff;
+        background: white;
         display: block;
     }
-
-    /* Keep Book Now at right */
-    .nav-book-btn {
-        order: 3 !important;   /* 👈 after menu */
-        position: static !important;
-        margin-left: 8px !important;
-        padding: 8px 14px !important;
-        font-size: 0.7rem !important;
-    }
-
-    /* Hide desktop nav */
-    nav {
-        display: none !important;
-    }
 }
+</style>
 </style>
 </body>
 </html>
