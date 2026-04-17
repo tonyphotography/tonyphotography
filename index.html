@@ -292,7 +292,7 @@
             <a href="#founder">Founder</a>
             <a href="#coverage">Coverage</a>
         </nav>
-        <div class="mobile-menu">
+<div class="mobile-menu">
     <span></span>
     <span></span>
     <span></span>
@@ -954,6 +954,65 @@
     }
 
     header .mobile-menu span {
+        width: 18px;
+        height: 2px;
+        background: white;
+        display: block;
+        border-radius: 2px;
+    }
+}
+</style>
+    <style>
+@media (max-width: 600px) {
+
+    header {
+        position: fixed !important;
+        top: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 92% !important;
+        padding: 10px 15px !important;
+        border-radius: 50px !important;
+        background: rgba(0,0,0,0.6) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+    }
+
+    /* HIDE NAV */
+    nav {
+        display: none !important;
+    }
+
+    /* BOOK BUTTON */
+    .nav-book-btn {
+        position: absolute !important;
+        right: 15px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        padding: 8px 14px !important;
+        font-size: 0.7rem !important;
+        z-index: 2;
+    }
+
+    /* MENU BUTTON */
+    .mobile-menu {
+        position: absolute !important;
+        right: 75px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 50% !important;
+        background: rgba(255,255,255,0.08) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 5px !important;
+        z-index: 3;
+    }
+
+    .mobile-menu span {
         width: 18px;
         height: 2px;
         background: white;
