@@ -1171,25 +1171,25 @@ window.onload = function() {
     }
 
     /* 🔥 PERFECT CENTER MENU */
-    .mobile-menu {
-        position: absolute !important;
-        left: 35% !important;
-        top: 50% !important;
-        transform: translate(-50%, -50%) !important;
+  .mobile-menu {
+    position: absolute !important;
+    left: 45% !important;   /* 👈 force left shift */
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
 
-        width: 40px !important;
-        height: 40px !important;
-        border-radius: 50% !important;
-        background: rgba(255,255,255,0.08) !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,0.08) !important;
 
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
 
-        z-index: 3;
-    }
+    z-index: 9999 !important; /* 👈 make sure visible */
+}
 
     .mobile-menu span {
         width: 18px;
