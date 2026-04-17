@@ -900,69 +900,7 @@
     }
 }
 </style>
-    <style>
-@media (max-width: 600px) {
-
-    header {
-        top: 15px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 92% !important;
-        padding: 10px 15px !important;
-        border-radius: 50px !important;
-        background: rgba(0,0,0,0.5) !important;
-        backdrop-filter: blur(20px) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        position: fixed !important;
-    }
-
-    .header-logo img {
-        width: 40px !important;
-        height: 40px !important;
-        border-radius: 50% !important;
-    }
-
-    .nav-book-btn {
-        padding: 8px 14px !important;
-        font-size: 0.7rem !important;
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    /* HIDE NAV */
-    nav {
-        display: none !important;
-    }
-
-    /* CREATE REAL MENU BUTTON */
-    header .mobile-menu {
-        position: absolute;
-        right: 70px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 4px;
-    }
-
-    header .mobile-menu span {
-        width: 18px;
-        height: 2px;
-        background: white;
-        display: block;
-        border-radius: 2px;
-    }
-}
-</style>
-    <style>
+<style>
 @media (max-width: 600px) {
 
     header {
@@ -976,40 +914,44 @@
         background: rgba(0,0,0,0.6) !important;
         backdrop-filter: blur(20px) !important;
         border: 1px solid rgba(255,255,255,0.1) !important;
+
+        display: flex !important;
+        align-items: center !important;
     }
 
-    /* HIDE NAV */
+    /* hide nav */
     nav {
         display: none !important;
     }
 
-    /* BOOK BUTTON */
-    .nav-book-btn {
-        position: absolute !important;
-        right: 15px !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        padding: 8px 14px !important;
-        font-size: 0.7rem !important;
-        z-index: 2;
+    /* logo left */
+    .header-logo {
+        margin-right: auto;
     }
 
-    /* MENU BUTTON */
+    /* BOOK BUTTON */
+    .nav-book-btn {
+        position: relative !important;
+        padding: 8px 14px !important;
+        font-size: 0.7rem !important;
+        margin-left: auto;
+    }
+
+    /* MENU BUTTON FIX */
     .mobile-menu {
-        position: absolute !important;
-        right: 75px !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        width: 42px !important;
-        height: 42px !important;
+        position: relative !important;
+        width: 40px !important;
+        height: 40px !important;
         border-radius: 50% !important;
         background: rgba(255,255,255,0.08) !important;
+
         display: flex !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
-        gap: 5px !important;
-        z-index: 3;
+        gap: 4px !important;
+
+        margin-left: 10px; /* 👈 THIS FIXES POSITION */
     }
 
     .mobile-menu span {
@@ -1020,6 +962,7 @@
         border-radius: 2px;
     }
 }
+</style>
 </style>
 </body>
 </html>
