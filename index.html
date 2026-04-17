@@ -1080,6 +1080,60 @@ window.onload = function() {
 }
 </style>
 </style>
+    <style>
+@media (max-width: 600px) {
+
+    /* FORCE HEADER IN ONE LINE */
+    header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        flex-wrap: nowrap !important;   /* 🔥 IMPORTANT */
+        gap: 8px;
+    }
+
+    /* HIDE NAV */
+    nav {
+        display: none !important;
+    }
+
+    /* LOGO */
+    .header-logo {
+        flex: 0 0 auto !important;
+    }
+
+    /* MENU BUTTON */
+    .mobile-menu {
+        flex: 0 0 auto !important;
+
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 50% !important;
+        background: rgba(255,255,255,0.08) !important;
+
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+    }
+
+    .mobile-menu span {
+        width: 16px;
+        height: 2px;
+        background: white;
+    }
+
+    /* BOOK BUTTON */
+    .nav-book-btn {
+        flex: 0 0 auto !important;
+        padding: 6px 12px !important;
+        font-size: 0.65rem !important;
+        white-space: nowrap !important; /* 🔥 IMPORTANT */
+    }
+
+}
+</style>
 </body>
 </html>
 
