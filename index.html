@@ -1204,6 +1204,60 @@ window.onload = function() {
     }
 }
 </style>
+    <style>
+
+/* ================= PC FIX ================= */
+
+/* Hide mobile menu on desktop */
+.mobile-nav {
+    display: none !important;
+}
+
+/* Center navbar menu on PC */
+header {
+    position: relative;
+}
+
+nav {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+
+/* ================= MOBILE FIX ================= */
+
+@media (max-width: 600px) {
+
+    /* Hide desktop nav */
+    nav {
+        display: none !important;
+    }
+
+    /* Mobile menu hidden by default */
+    .mobile-nav {
+        display: none !important;
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        background: rgba(0,0,0,0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 20px;
+        flex-direction: column;
+        gap: 15px;
+        z-index: 1000;
+    }
+
+    /* Show menu when active */
+    .mobile-nav.active {
+        display: flex !important;
+    }
+}
+
+</style>
 </body>
 </html>
 
