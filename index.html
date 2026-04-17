@@ -916,56 +916,105 @@
     }
 }
 </style>
-</style>
-    <style>
+<style>
 @media (max-width: 600px) {
 
+    /* HIDE DEFAULT NAV */
+    nav {
+        display: none !important;
+    }
+
+    /* MENU BUTTON (CREATE IF NOT VISIBLE) */
+    .mobile-menu {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        z-index: 1001;
+    }
+
+    .mobile-menu span {
+        width: 18px;
+        height: 2px;
+        background: white;
+        display: block;
+    }
+
+    /* MENU PANEL */
     .mobile-nav {
         position: fixed;
         top: 80px;
         left: 50%;
-        transform: translateX(-50%) scale(0.9);
+        transform: translateX(-50%);
         width: 90%;
-        background: rgba(0,0,0,0.9);
+        background: rgba(0,0,0,0.95);
         backdrop-filter: blur(20px);
         border-radius: 20px;
         padding: 20px;
-        display: flex;
+
+        display: none;
         flex-direction: column;
         gap: 15px;
-        opacity: 0;
-        pointer-events: none;
-        transition: 0.3s ease;
-        z-index: 999;
+        z-index: 1000;
+    }
+
+    .mobile-nav.active {
+        display: flex;
     }
 
     .mobile-nav a {
         color: white;
         text-decoration: none;
         font-weight: 700;
-        font-size: 1rem;
-        text-transform: uppercase;
         text-align: center;
         padding: 10px;
-        border-radius: 10px;
-    }
-
-    .mobile-nav a:hover {
-        background: rgba(168,255,120,0.1);
-        color: #a8ff78;
-    }
-
-    .mobile-nav.active {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-        pointer-events: auto;
+        text-transform: uppercase;
     }
 }
 </style>
-    <script>
-function toggleMenu() {
-    document.getElementById("mobileNav").classList.toggle("active");
-}
+
+<script>
+/* CREATE MENU BUTTON + MENU AUTOMATICALLY */
+window.onload = function() {
+
+    const header = document.querySelector("header");
+
+    /* ADD MENU BUTTON */
+    const menuBtn = document.createElement("div");
+    menuBtn.className = "mobile-menu";
+    menuBtn.innerHTML = "<span></span><span></span><span></span>";
+
+    /* ADD MENU PANEL */
+    const menu = document.createElement("div");
+    menu.className = "mobile-nav";
+    menu.id = "mobileNav";
+    menu.innerHTML = `
+        <a href="#home">Home</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#founder">Founder</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#gallery">Gallery</a>
+    `;
+
+    /* APPEND */
+    header.appendChild(menuBtn);
+    document.body.appendChild(menu);
+
+    /* CLICK FUNCTION */
+    menuBtn.onclick = function() {
+        menu.classList.toggle("active");
+    };
+
+};
 </script>
 </body>
 </html>
