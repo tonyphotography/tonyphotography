@@ -840,6 +840,61 @@
     }
 }
 </style>
+    <style>
+@media (max-width: 600px) {
+
+    header {
+        top: 15px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 92% !important;
+        padding: 10px 15px !important;
+        border-radius: 50px !important;
+        background: rgba(0,0,0,0.5) !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+    }
+
+    .header-logo img {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+    }
+
+    .nav-book-btn {
+        padding: 8px 14px !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* Hide normal nav */
+    nav {
+        display: none !important;
+    }
+
+    /* Hamburger style */
+    header::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    header::before {
+        content: "≡";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 18px;
+        color: white;
+    }
+}
+</style>
 </body>
 </html>
 
