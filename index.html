@@ -793,113 +793,6 @@
         
     </div>
 </section>
-    <style>
-@media (max-width: 600px) {
-
-    header {
-        padding: 15px 5% !important;
-    }
-
-    .header-logo img {
-        max-height: 40px !important;
-    }
-
-    .nav-book-btn {
-        padding: 8px 16px !important;
-        font-size: 0.7rem !important;
-    }
-
-    .hero {
-        padding: 80px 5% 30px !important;
-    }
-
-    .hero-container {
-        padding: 30px 15px !important;
-        border-radius: 20px !important;
-    }
-
-    .top-badge {
-        font-size: 0.55rem !important;
-        letter-spacing: 2px !important;
-    }
-
-    .hero h1 {
-        font-size: 1.6rem !important;  /* smaller now */
-        line-height: 1.2 !important;
-    }
-
-    .brand-text {
-        font-size: 0.85rem !important;
-        margin-top: 6px !important;
-    }
-
-    .hero-sub {
-        font-size: 0.75rem !important;
-        line-height: 1.4 !important;
-        margin: 12px auto !important;
-    }
-
-    .cta-primary {
-        padding: 10px 20px !important;
-        font-size: 0.75rem !important;
-    }
-}
-</style>
-    <style>
-@media (max-width: 600px) {
-
-    header {
-        top: 15px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        width: 92% !important;
-        padding: 10px 15px !important;
-        border-radius: 50px !important;
-        background: rgba(0,0,0,0.5) !important;
-        backdrop-filter: blur(20px) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-    }
-
-    .header-logo img {
-        width: 40px !important;
-        height: 40px !important;
-        border-radius: 50% !important;
-    }
-
-    .nav-book-btn {
-        padding: 8px 14px !important;
-        font-size: 0.7rem !important;
-    }
-
-    /* Hide normal nav */
-    nav {
-        display: none !important;
-    }
-
-    /* Hamburger style */
-    header::after {
-        content: "";
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.08);
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    header::before {
-        content: "≡";
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 18px;
-        color: white;
-    }
-}
-</style>
 <style>
 @media (max-width: 600px) {
 
@@ -938,21 +831,23 @@
     }
 
     /* MENU BUTTON FIX */
-    .mobile-menu {
-        position: relative !important;
-        width: 40px !important;
-        height: 40px !important;
-        border-radius: 50% !important;
-        background: rgba(255,255,255,0.08) !important;
+  .mobile-menu {
+    position: absolute !important;
+    right: 75px !important;   /* 👈 moves it near button */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
 
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 4px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,0.08) !important;
 
-        margin-left: 10px; /* 👈 THIS FIXES POSITION */
-    }
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
 
     .mobile-menu span {
         width: 18px;
