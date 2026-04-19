@@ -325,6 +325,354 @@
     .gallery-item:hover img { transform: scale(1.1); filter: brightness(0.7); }
     .gallery-item:hover::after { opacity: 1; }
 
+    /* ============================
+       CUSTOM PACKAGE BUILDER
+    ============================ */
+    #custom-package {
+        background: var(--bg-deep);
+        padding: 110px 5%;
+        position: relative;
+        overflow: hidden;
+    }
+    #custom-package::before {
+        content: '';
+        position: absolute;
+        width: 800px; height: 800px;
+        background: radial-gradient(circle, rgba(168,255,120,0.05) 0%, transparent 65%);
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+    #custom-package::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: radial-gradient(rgba(168,255,120,0.04) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .pkg-header { text-align: center; position: relative; z-index: 1; }
+    .pkg-header .section-label { margin-bottom: 14px; }
+    .pkg-header .section-title { margin-bottom: 16px; }
+    .pkg-header p { color: var(--w60); font-size: 1rem; line-height: 1.8; max-width: 600px; margin: 0 auto 70px; }
+
+    .pkg-builder {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 380px;
+        gap: 32px;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* LEFT PANEL — Options */
+    .pkg-options { display: flex; flex-direction: column; gap: 28px; }
+
+    .pkg-section {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 28px;
+        padding: 32px 36px;
+        transition: border-color 0.3s;
+    }
+    .pkg-section:hover { border-color: rgba(168,255,120,0.18); }
+
+    .pkg-section-title {
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--glow);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .pkg-section-title span { font-size: 1.1rem; }
+
+    .pkg-option-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 12px;
+    }
+
+    .pkg-option {
+        border: 1.5px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        padding: 16px 18px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        background: rgba(255,255,255,0.02);
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+        user-select: none;
+    }
+    .pkg-option::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(168,255,120,0.06), transparent);
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+    .pkg-option:hover { border-color: rgba(168,255,120,0.35); transform: translateY(-2px); }
+    .pkg-option:hover::before { opacity: 1; }
+    .pkg-option.selected {
+        border-color: var(--glow);
+        background: rgba(168,255,120,0.07);
+        box-shadow: 0 0 20px rgba(168,255,120,0.12);
+    }
+    .pkg-option.selected::before { opacity: 1; }
+
+    .pkg-option-check {
+        width: 20px; height: 20px;
+        border-radius: 6px;
+        border: 1.5px solid rgba(255,255,255,0.2);
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        margin-top: 1px;
+        transition: all 0.25s;
+    }
+    .pkg-option.selected .pkg-option-check {
+        background: var(--glow);
+        border-color: var(--glow);
+    }
+    .pkg-option-check svg { opacity: 0; transition: opacity 0.2s; }
+    .pkg-option.selected .pkg-option-check svg { opacity: 1; }
+
+    .pkg-option-text { flex: 1; }
+    .pkg-option-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; }
+    .pkg-option-price { font-size: 0.72rem; color: var(--glow); font-weight: 800; }
+    .pkg-option-desc { font-size: 0.72rem; color: var(--w60); margin-top: 4px; line-height: 1.4; }
+
+    /* Duration slider */
+    .duration-row {
+        display: flex; align-items: center; gap: 16px; margin-top: 8px;
+    }
+    .duration-label {
+        font-size: 0.78rem; color: var(--w60); font-weight: 700; white-space: nowrap;
+    }
+    .duration-slider {
+        flex: 1;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 4px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 4px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+    }
+    .duration-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px; height: 20px;
+        border-radius: 50%;
+        background: var(--glow);
+        cursor: pointer;
+        box-shadow: 0 0 12px rgba(168,255,120,0.5);
+        transition: transform 0.15s;
+    }
+    .duration-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    .duration-val {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.5rem;
+        color: var(--glow);
+        min-width: 60px;
+        text-align: right;
+    }
+
+    /* Delivery toggle */
+    .delivery-toggle {
+        display: flex;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 50px;
+        padding: 4px;
+        gap: 4px;
+    }
+    .delivery-btn {
+        flex: 1;
+        padding: 10px 20px;
+        border-radius: 40px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--w60);
+        cursor: pointer;
+        transition: all 0.25s;
+        text-align: center;
+        border: none;
+        background: transparent;
+    }
+    .delivery-btn.active {
+        background: var(--glow);
+        color: #0a1408;
+        box-shadow: 0 0 16px rgba(168,255,120,0.3);
+    }
+
+    /* Add-on chips */
+    .addon-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .addon-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: 50px;
+        border: 1.5px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.03);
+        cursor: pointer;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: rgba(255,255,255,0.7);
+        transition: all 0.25s;
+        user-select: none;
+    }
+    .addon-chip:hover { border-color: rgba(168,255,120,0.4); color: var(--white); }
+    .addon-chip.selected {
+        background: rgba(168,255,120,0.1);
+        border-color: var(--glow);
+        color: var(--glow);
+    }
+    .addon-chip-price { color: var(--gold); font-weight: 800; }
+
+    /* RIGHT PANEL — Summary */
+    .pkg-summary {
+        background: var(--glass);
+        border: 1px solid rgba(168,255,120,0.18);
+        border-radius: 28px;
+        padding: 36px 32px;
+        backdrop-filter: blur(30px);
+        position: sticky;
+        top: 110px;
+        height: fit-content;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(168,255,120,0.05) inset;
+    }
+
+    .pkg-summary-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        margin-bottom: 6px;
+    }
+    .pkg-summary-sub {
+        font-size: 0.7rem;
+        color: var(--w60);
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 28px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .pkg-line-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; min-height: 120px; }
+
+    .pkg-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        animation: lineIn 0.3s ease;
+    }
+    @keyframes lineIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+    .pkg-line-name { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-weight: 600; flex: 1; }
+    .pkg-line-amt { font-size: 0.82rem; color: var(--white); font-weight: 800; white-space: nowrap; }
+
+    .pkg-empty-state {
+        text-align: center;
+        padding: 24px 0;
+        color: rgba(255,255,255,0.2);
+        font-size: 0.82rem;
+        font-style: italic;
+    }
+    .pkg-empty-state .empty-icon { font-size: 2rem; margin-bottom: 8px; opacity: 0.3; }
+
+    .pkg-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(168,255,120,0.2), transparent); margin: 20px 0; }
+
+    .pkg-total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+    .pkg-total-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--w60); }
+    .pkg-total-amt {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2.8rem;
+        color: var(--glow);
+        letter-spacing: 1px;
+        line-height: 1;
+        text-shadow: 0 0 30px rgba(168,255,120,0.3);
+        transition: all 0.3s ease;
+    }
+    .pkg-total-note { font-size: 0.7rem; color: rgba(255,255,255,0.25); text-align: right; margin-bottom: 28px; }
+
+    .pkg-cta {
+        display: block;
+        width: 100%;
+        padding: 18px;
+        background: var(--glow);
+        color: #0a1408;
+        border-radius: 16px;
+        font-weight: 900;
+        font-size: 0.88rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.3s, background 0.2s;
+        box-shadow: 0 0 30px rgba(168,255,120,0.35);
+        margin-bottom: 12px;
+    }
+    .pkg-cta:hover { background: #bcff90; transform: scale(1.02); box-shadow: 0 0 50px rgba(168,255,120,0.55); }
+
+    .pkg-cta-ghost {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        background: transparent;
+        color: rgba(255,255,255,0.5);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: center;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    .pkg-cta-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+
+    .pkg-trust-badges {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+    .pkg-badge {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.65rem;
+        color: rgba(255,255,255,0.3);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .pkg-badge::before { content: '✓'; color: var(--glow); }
+
     /* FOOTER */
     footer { background: #080c06; border-top: 1px solid rgba(255,255,255,0.05); }
     .footer-inner { max-width: 1200px; margin: 0 auto; padding: 70px 5% 40px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 60px; }
@@ -345,6 +693,10 @@
     @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
     /* RESPONSIVE */
+    @media (max-width: 1024px) {
+        .pkg-builder { grid-template-columns: 1fr; }
+        .pkg-summary { position: static; }
+    }
     @media (max-width: 900px) {
         .desktop-nav { display: none; }
         .hamburger   { display: flex; }
@@ -372,6 +724,10 @@
         .footer-brand { grid-column: unset; }
         .footer-bottom { flex-direction: column; text-align: center; }
         .hero-deco { display: none; }
+        .pkg-section { padding: 24px 20px; }
+        .pkg-option-grid { grid-template-columns: 1fr 1fr; }
+        .pkg-summary { padding: 28px 24px; }
+        #custom-package { padding: 70px 5%; }
     }
     </style>
 </head>
@@ -389,6 +745,7 @@
         <a href="#why-us">Why Us</a>
         <a href="#founder">Founder</a>
         <a href="#gallery">Gallery</a>
+        <a href="#custom-package">Packages</a>
     </nav>
     <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     <a href="https://wa.me/919989920100" class="book-btn">Book Now</a>
@@ -399,6 +756,7 @@
     <a href="#why-us">Why Us</a>
     <a href="#founder">Founder</a>
     <a href="#gallery">Gallery</a>
+    <a href="#custom-package">Packages</a>
     <a href="https://wa.me/919989920100" class="mobile-book">Book Now ✦</a>
 </nav>
 
@@ -519,7 +877,6 @@
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony understood our political rally vision and made it look like a presidential campaign. Outstanding.</p><div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Suresh Naidu</div><div class="testi-role">Political Campaign · Telangana</div></div></div></div>
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The sangeet and haldi videos were so beautifully edited. Our family still watches them every anniversary.</p><div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Meera Kapoor</div><div class="testi-role">Wedding Client · Delhi</div></div></div></div>
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Our conference looked like an Apple keynote after Tony's edit. Absolutely premium quality work.</p><div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karthik Rao</div><div class="testi-role">Corporate Event · Chennai</div></div></div></div>
-            <!-- duplicate for seamless loop -->
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony captured our wedding perfectly. Every frame felt like a Bollywood film — cinematic, emotional, unforgettable.</p><div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Riya Sharma</div><div class="testi-role">Wedding Client · Hyderabad</div></div></div></div>
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The product shoot exceeded every expectation. The lighting and colour grading elevated our brand instantly.</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Brand Director · Mumbai</div></div></div></div>
             <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Delivered next day as promised. Jaw-dropping quality. My birthday reel went viral on Instagram!</p><div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya Reddy</div><div class="testi-role">Birthday Event · Bangalore</div></div></div></div>
@@ -559,6 +916,204 @@
     </div>
 </section>
 
+<!-- ============================
+     CUSTOM PACKAGE BUILDER
+============================ -->
+<section id="custom-package">
+    <div class="pkg-header reveal">
+        <span class="section-label">Build Your Own</span>
+        <h2 class="section-title">CUSTOMIZE YOUR <span class="accent">PACKAGE</span></h2>
+        <p>Pick exactly what you need — nothing more, nothing less. Build your dream shoot and get an instant quote sent to WhatsApp.</p>
+    </div>
+
+    <div class="pkg-builder">
+
+        <!-- LEFT: Options -->
+        <div class="pkg-options">
+
+            <!-- Event Type -->
+            <div class="pkg-section reveal">
+                <div class="pkg-section-title"><span>🎯</span> Event Type</div>
+                <div class="pkg-option-grid" id="event-options">
+                    <div class="pkg-option" data-group="event" data-price="15000" data-name="Wedding">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Wedding</div>
+                            <div class="pkg-option-price">from ₹15,000</div>
+                            <div class="pkg-option-desc">Full day coverage</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="event" data-price="8000" data-name="Engagement">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Engagement</div>
+                            <div class="pkg-option-price">from ₹8,000</div>
+                            <div class="pkg-option-desc">Half day shoot</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="event" data-price="5000" data-name="Birthday">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Birthday</div>
+                            <div class="pkg-option-price">from ₹5,000</div>
+                            <div class="pkg-option-desc">Party & portrait</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="event" data-price="12000" data-name="Corporate">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Corporate</div>
+                            <div class="pkg-option-price">from ₹12,000</div>
+                            <div class="pkg-option-desc">Events & launches</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="event" data-price="6000" data-name="Portrait">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Portrait</div>
+                            <div class="pkg-option-price">from ₹6,000</div>
+                            <div class="pkg-option-desc">Personal shoots</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="event" data-price="10000" data-name="Brand Shoot">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Brand Shoot</div>
+                            <div class="pkg-option-price">from ₹10,000</div>
+                            <div class="pkg-option-desc">Product & identity</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Type -->
+            <div class="pkg-section reveal">
+                <div class="pkg-section-title"><span>🎬</span> Media Type</div>
+                <div class="pkg-option-grid" id="media-options">
+                    <div class="pkg-option selected" data-group="media" data-price="0" data-name="Photography">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Photography</div>
+                            <div class="pkg-option-price">Included</div>
+                            <div class="pkg-option-desc">Edited stills</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="media" data-price="5000" data-name="Videography">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Videography</div>
+                            <div class="pkg-option-price">+₹5,000</div>
+                            <div class="pkg-option-desc">Cinematic film</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="media" data-price="8000" data-name="Photo + Video">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Photo + Video</div>
+                            <div class="pkg-option-price">+₹8,000</div>
+                            <div class="pkg-option-desc">Full package</div>
+                        </div>
+                    </div>
+                    <div class="pkg-option" data-group="media" data-price="3000" data-name="Reels Only">
+                        <div class="pkg-option-check"><svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4L4 7.5L10 1" stroke="#0a1408" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+                        <div class="pkg-option-text">
+                            <div class="pkg-option-name">Reels Only</div>
+                            <div class="pkg-option-price">+₹3,000</div>
+                            <div class="pkg-option-desc">Instagram reels</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duration -->
+            <div class="pkg-section reveal">
+                <div class="pkg-section-title"><span>⏱️</span> Coverage Duration</div>
+                <div class="duration-row">
+                    <span class="duration-label">Hours:</span>
+                    <input type="range" class="duration-slider" id="duration-slider" min="2" max="12" value="4" step="1">
+                    <div class="duration-val" id="duration-val">4 hrs</div>
+                </div>
+                <p style="font-size:0.75rem;color:var(--w60);margin-top:14px;line-height:1.5;">Each hour beyond 4 hrs is charged at <span style="color:var(--glow);font-weight:800;">₹1,500/hr</span></p>
+            </div>
+
+            <!-- Delivery Speed -->
+            <div class="pkg-section reveal">
+                <div class="pkg-section-title"><span>🚀</span> Delivery Speed</div>
+                <div class="delivery-toggle">
+                    <button class="delivery-btn active" data-price="0" data-name="Standard (5–7 days)" onclick="selectDelivery(this)">Standard · 5–7 Days</button>
+                    <button class="delivery-btn" data-price="2000" data-name="Express (2–3 days)" onclick="selectDelivery(this)">Express · 2–3 Days +₹2K</button>
+                    <button class="delivery-btn" data-price="4500" data-name="Next Day Delivery" onclick="selectDelivery(this)">Next Day +₹4.5K</button>
+                </div>
+            </div>
+
+            <!-- Add-ons -->
+            <div class="pkg-section reveal">
+                <div class="pkg-section-title"><span>✨</span> Add-Ons</div>
+                <div class="addon-chips" id="addon-chips">
+                    <div class="addon-chip" data-price="2500" data-name="Drone Shots" onclick="toggleAddon(this)">
+                        🚁 Drone Shots <span class="addon-chip-price">+₹2,500</span>
+                    </div>
+                    <div class="addon-chip" data-price="1500" data-name="Highlight Reel" onclick="toggleAddon(this)">
+                        🎞️ Highlight Reel <span class="addon-chip-price">+₹1,500</span>
+                    </div>
+                    <div class="addon-chip" data-price="2000" data-name="Album Design" onclick="toggleAddon(this)">
+                        📖 Album Design <span class="addon-chip-price">+₹2,000</span>
+                    </div>
+                    <div class="addon-chip" data-price="1000" data-name="Raw Files" onclick="toggleAddon(this)">
+                        💾 Raw Files <span class="addon-chip-price">+₹1,000</span>
+                    </div>
+                    <div class="addon-chip" data-price="3000" data-name="Second Photographer" onclick="toggleAddon(this)">
+                        📷 2nd Photographer <span class="addon-chip-price">+₹3,000</span>
+                    </div>
+                    <div class="addon-chip" data-price="800" data-name="Social Media Edits" onclick="toggleAddon(this)">
+                        📱 Social Media Edits <span class="addon-chip-price">+₹800</span>
+                    </div>
+                    <div class="addon-chip" data-price="1800" data-name="Color Grading Pro" onclick="toggleAddon(this)">
+                        🎨 Color Grading Pro <span class="addon-chip-price">+₹1,800</span>
+                    </div>
+                    <div class="addon-chip" data-price="1200" data-name="Slideshow Film" onclick="toggleAddon(this)">
+                        🎥 Slideshow Film <span class="addon-chip-price">+₹1,200</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Summary -->
+        <div class="pkg-summary reveal">
+            <div class="pkg-summary-title">Your Package</div>
+            <div class="pkg-summary-sub">Live estimate — final quote on WhatsApp</div>
+
+            <div class="pkg-line-items" id="pkg-line-items">
+                <div class="pkg-empty-state">
+                    <div class="empty-icon">📋</div>
+                    Select options to build your package
+                </div>
+            </div>
+
+            <div class="pkg-divider"></div>
+
+            <div class="pkg-total-row">
+                <div class="pkg-total-label">Estimated Total</div>
+                <div class="pkg-total-amt" id="pkg-total">₹0</div>
+            </div>
+            <div class="pkg-total-note">* Prices may vary based on location & specifics</div>
+
+            <a id="pkg-whatsapp-btn" href="https://wa.me/919989920100" class="pkg-cta" target="_blank" rel="noopener">
+                📲 Get Quote on WhatsApp
+            </a>
+            <button class="pkg-cta-ghost" onclick="resetPackage()">↺ Reset Package</button>
+
+            <div class="pkg-trust-badges">
+                <span class="pkg-badge">No Hidden Fees</span>
+                <span class="pkg-badge">Free Consultation</span>
+                <span class="pkg-badge">100% Satisfaction</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
     <div class="footer-inner">
@@ -579,6 +1134,7 @@
                 <li><a href="#founder">Founder</a></li>
                 <li><a href="#process">Process</a></li>
                 <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#custom-package">Build Package</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -612,7 +1168,7 @@ document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
     ring.style.cssText = `left:${rx}px;top:${ry}px`;
     requestAnimationFrame(animCursor);
 })();
-document.querySelectorAll('a,button,.why-card,.cov-card,.testi-card').forEach(el=>{
+document.querySelectorAll('a,button,.why-card,.cov-card,.testi-card,.pkg-option,.addon-chip').forEach(el=>{
     el.addEventListener('mouseenter', ()=>{ ring.style.width='56px'; ring.style.height='56px'; ring.style.borderColor='rgba(168,255,120,0.8)'; });
     el.addEventListener('mouseleave', ()=>{ ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(168,255,120,0.5)'; });
 });
@@ -646,9 +1202,7 @@ window.addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>40)
 
 /* ACTIVE NAV */
 const navLinks=document.querySelectorAll('.desktop-nav a');
-new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ navLinks.forEach(l=>l.classList.remove('active')); const a=document.querySelector(`.desktop-nav a[href="#${e.target.id}"]`); if(a)a.classList.add('active'); } });
-},{threshold:.35}).observe && document.querySelectorAll('section[id],main[id]').forEach(s=>
+document.querySelectorAll('section[id],main[id]').forEach(s=>
     new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ navLinks.forEach(l=>l.classList.remove('active')); const a=document.querySelector(`.desktop-nav a[href="#${e.target.id}"]`); if(a)a.classList.add('active'); } }); },{threshold:.35}).observe(s)
 );
 
@@ -669,12 +1223,148 @@ function counter(el,target){
     const step=ts=>{ if(!s)s=ts; const p=Math.min((ts-s)/dur,1), ease=1-Math.pow(1-p,3); el.textContent=Math.floor(ease*target)+'+'; if(p<1)requestAnimationFrame(step); else el.textContent=target+'+'; };
     requestAnimationFrame(step);
 }
-new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ const el=e.target.querySelector('.stat-num'); counter(el,+el.dataset.target); e.target.setAttribute('data-counted','1'); } });
-},{threshold:.5}).observe && document.querySelectorAll('.stat-item').forEach(s=>
+document.querySelectorAll('.stat-item').forEach(s=>
     new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting && !e.target.dataset.counted){ const el=e.target.querySelector('.stat-num'); counter(el,+el.dataset.target); e.target.dataset.counted='1'; } }); },{threshold:.5}).observe(s)
 );
+
+/* =============================
+   PACKAGE BUILDER LOGIC
+============================= */
+const pkgState = {
+    event: null,
+    eventPrice: 0,
+    media: 'Photography',
+    mediaPrice: 0,
+    duration: 4,
+    delivery: 'Standard (5–7 days)',
+    deliveryPrice: 0,
+    addons: []
+};
+
+// Single-select option groups
+document.querySelectorAll('.pkg-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+        const group = opt.dataset.group;
+        // Deselect others in same group
+        document.querySelectorAll(`.pkg-option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        const price = parseInt(opt.dataset.price);
+        const name = opt.dataset.name;
+        if (group === 'event') { pkgState.event = name; pkgState.eventPrice = price; }
+        if (group === 'media') { pkgState.media = name; pkgState.mediaPrice = price; }
+        updateSummary();
+    });
+});
+
+// Duration slider
+const slider = document.getElementById('duration-slider');
+const durVal  = document.getElementById('duration-val');
+slider.addEventListener('input', () => {
+    pkgState.duration = parseInt(slider.value);
+    durVal.textContent = pkgState.duration + ' hrs';
+    // Update slider gradient
+    const pct = ((pkgState.duration - 2) / 10) * 100;
+    slider.style.background = `linear-gradient(to right, var(--glow) ${pct}%, rgba(255,255,255,0.08) ${pct}%)`;
+    updateSummary();
+});
+// Init slider gradient
+slider.style.background = `linear-gradient(to right, var(--glow) 20%, rgba(255,255,255,0.08) 20%)`;
+
+// Delivery toggle
+function selectDelivery(btn) {
+    document.querySelectorAll('.delivery-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    pkgState.delivery = btn.dataset.name;
+    pkgState.deliveryPrice = parseInt(btn.dataset.price);
+    updateSummary();
+}
+// Set data attrs on delivery btns
+document.querySelectorAll('.delivery-btn').forEach(b => {
+    b.dataset.name = b.textContent.trim().replace(/ \+.*/, '').replace(/·.*/, '').trim();
+});
+document.querySelectorAll('.delivery-btn')[0].dataset.name = 'Standard (5–7 days)';
+document.querySelectorAll('.delivery-btn')[1].dataset.name = 'Express (2–3 days)';
+document.querySelectorAll('.delivery-btn')[2].dataset.name = 'Next Day Delivery';
+document.querySelectorAll('.delivery-btn')[0].dataset.price = '0';
+document.querySelectorAll('.delivery-btn')[1].dataset.price = '2000';
+document.querySelectorAll('.delivery-btn')[2].dataset.price = '4500';
+
+// Addons
+function toggleAddon(chip) {
+    chip.classList.toggle('selected');
+    const name  = chip.dataset.name;
+    const price = parseInt(chip.dataset.price);
+    const idx   = pkgState.addons.findIndex(a => a.name === name);
+    if (idx >= 0) pkgState.addons.splice(idx, 1);
+    else pkgState.addons.push({ name, price });
+    updateSummary();
+}
+// Set data-name on addon chips
+document.querySelectorAll('.addon-chip').forEach(chip => {
+    chip.dataset.name  = chip.childNodes[0].textContent.trim().replace(/^[^\s]+ /, '');
+});
+
+function updateSummary() {
+    const lineItems = document.getElementById('pkg-line-items');
+    const totalEl   = document.getElementById('pkg-total');
+    const waBtn     = document.getElementById('pkg-whatsapp-btn');
+
+    const lines = [];
+
+    if (pkgState.event) lines.push({ name: pkgState.event, price: pkgState.eventPrice });
+    if (pkgState.mediaPrice > 0) lines.push({ name: pkgState.media, price: pkgState.mediaPrice });
+
+    // Extra hours (beyond 4)
+    const extraHrs = Math.max(0, pkgState.duration - 4);
+    if (extraHrs > 0) lines.push({ name: `${pkgState.duration} hrs coverage (+${extraHrs} extra)`, price: extraHrs * 1500 });
+    else if (pkgState.event) lines.push({ name: `${pkgState.duration} hrs coverage`, price: 0 });
+
+    if (pkgState.deliveryPrice > 0) lines.push({ name: pkgState.delivery, price: pkgState.deliveryPrice });
+    pkgState.addons.forEach(a => lines.push({ name: a.name, price: a.price }));
+
+    if (lines.length === 0) {
+        lineItems.innerHTML = `<div class="pkg-empty-state"><div class="empty-icon">📋</div>Select options to build your package</div>`;
+        totalEl.textContent = '₹0';
+        return;
+    }
+
+    let total = lines.reduce((s, l) => s + l.price, 0);
+
+    lineItems.innerHTML = lines.map(l => `
+        <div class="pkg-line">
+            <span class="pkg-line-name">${l.name}</span>
+            <span class="pkg-line-amt">${l.price === 0 ? 'Incl.' : '₹' + l.price.toLocaleString('en-IN')}</span>
+        </div>
+    `).join('');
+
+    // Animate total
+    totalEl.style.transform = 'scale(1.08)';
+    setTimeout(() => totalEl.style.transform = 'scale(1)', 200);
+    totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+
+    // Build WhatsApp message
+    const msgLines = lines.map(l => `• ${l.name}: ₹${l.price.toLocaleString('en-IN')}`).join('\n');
+    const msg = encodeURIComponent(`Hi Tony! I've built my package:\n\n${msgLines}\n\n*Estimated Total: ₹${total.toLocaleString('en-IN')}*\n\nPlease confirm availability and final pricing. 🙏`);
+    waBtn.href = `https://wa.me/919989920100?text=${msg}`;
+}
+
+function resetPackage() {
+    document.querySelectorAll('.pkg-option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('.addon-chip').forEach(c => c.classList.remove('selected'));
+    document.querySelectorAll('.delivery-btn').forEach((b,i) => b.classList.toggle('active', i === 0));
+    slider.value = 4;
+    durVal.textContent = '4 hrs';
+    slider.style.background = `linear-gradient(to right, var(--glow) 20%, rgba(255,255,255,0.08) 20%)`;
+
+    // Re-select default media
+    document.querySelector('.pkg-option[data-name="Photography"]').classList.add('selected');
+
+    pkgState.event = null; pkgState.eventPrice = 0;
+    pkgState.media = 'Photography'; pkgState.mediaPrice = 0;
+    pkgState.duration = 4; pkgState.delivery = 'Standard (5–7 days)';
+    pkgState.deliveryPrice = 0; pkgState.addons = [];
+    updateSummary();
+}
 </script>
-</section>
 </body>
 </html>
