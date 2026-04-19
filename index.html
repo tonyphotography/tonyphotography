@@ -773,6 +773,46 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 </script>
 </section>
+<!-- PACKAGE BUILDER -->
+<section id="packages" style="padding:80px 5%; text-align:center;">
+  <h2>Build Your Package</h2>
 
+  <div id="event-types">
+    <div class="pkg-option is-selected" data-price="15000">
+      <input type="radio" value="Wedding" checked> Wedding
+    </div>
+    <div class="pkg-option" data-price="8000">
+      <input type="radio" value="Birthday"> Birthday
+    </div>
+  </div>
+
+  <div id="services">
+    <div class="pkg-option is-locked" data-price="0">
+      <input type="checkbox" value="Photography" checked disabled> Photography
+    </div>
+    <div class="pkg-option" data-price="5000">
+      <input type="checkbox" value="Videography"> Videography
+    </div>
+  </div>
+
+  <div id="addons">
+    <div class="pkg-option" data-price="2000">
+      <input type="checkbox" value="Drone"> Drone
+    </div>
+  </div>
+
+  <br>
+  <input type="range" id="dur-slider" min="2" max="12" value="4">
+  <p><span id="dur-val">4</span> hours</p>
+
+  <h3>Summary</h3>
+  <p>Event: <span id="s-event"></span></p>
+  <p>Duration: <span id="s-dur"></span></p>
+  <p>Services: <span id="s-services"></span></p>
+  <p>Addons: <span id="s-addons"></span></p>
+  <h2>Total: <span id="s-total"></span></h2>
+
+  <button id="pkg-send">Send to WhatsApp</button>
+</section>
 </body>
 </html>
