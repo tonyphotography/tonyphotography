@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tony Photography | Premium Cinematic Visuals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+        --glow:      #a8ff78;
+        --glow-dim:  rgba(168,255,120,0.13);
+        --gold:      #c5a059;
+        --dark:      #0d1209;
+        --bg-deep:   #141a12;
+        --bg-olive:  #1b2419;
+        --dark-sage: #2d3829;
+        --glass:     rgba(18,24,15,0.88);
+        --white:     #ffffff;
+        --w60:       rgba(255,255,255,0.6);
+        --w08:       rgba(255,255,255,0.08);
+        --w12:       rgba(255,255,255,0.12);
+        --r40: 40px;
+        --r60: 60px;
+    }
+
+    html { scroll-behavior: smooth; }
+    section[id], main[id] { scroll-margin-top: 110px; }
+
+    body {
+        background: var(--bg-deep);
+        color: var(--white);
+        font-family: 'Montserrat', sans-serif;
+        overflow-x: hidden;
+        cursor: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body::before {
+        content: "";
+        position: fixed; inset: 0;
+        background:
+            radial-gradient(ellipse 65% 55% at 80% 8%,  rgba(168,255,120,0.08) 0%, transparent 55%),
+            radial-gradient(ellipse 55% 65% at 12% 88%, rgba(168,255,120,0.07) 0%, transparent 55%),
+            radial-gradient(circle at 50% 50%, #1e2c1a 0%, #0d1209 70%);
+        z-index: -2; pointer-events: none;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { text-decoration: none; }
+
+    #cursor-dot, #cursor-ring {
+        position: fixed; border-radius: 50%;
+        pointer-events: none; z-index: 99999;
+        transform: translate(-50%, -50%);
+    }
+    #cursor-dot  { width: 8px; height: 8px; background: var(--glow); box-shadow: 0 0 12px var(--glow); }
+    #cursor-ring { width: 36px; height: 36px; border: 1.5px solid rgba(168,255,120,0.5); transition: width 0.2s, height 0.2s; }
+
+    #particle-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+
+    header {
+        position: fixed; top: 20px; left: 50%;
+        transform: translateX(-50%);
+        width: min(92%, 1180px);
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 12px 10px 20px;
+        background: rgba(8,12,7,0.65);
+        border: 1px solid rgba(168,255,120,0.12);
+        border-radius: 70px;
+        backdrop-filter: blur(28px);
+        z-index: 9999;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.45), 0 1px 0 rgba(168,255,120,0.08) inset;
+        transition: background 0.4s, box-shadow 0.4s;
+    }
+    header.scrolled { background: rgba(6,9,5,0.92); box-shadow: 0 12px 50px rgba(0,0,0,0.65), 0 0 0 1px rgba(168,255,120,0.1); }
+
+    .header-logo img { height: 44px; filter: drop-shadow(0 0 12px rgba(168,255,120,0.2)); transition: filter 0.3s; }
+    .header-logo img:hover { filter: drop-shadow(0 0 22px rgba(168,255,120,0.5)); }
+
+    .desktop-nav {
+        display: flex; align-items: center; gap: 4px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 50px; padding: 6px 8px;
+    }
+    .desktop-nav a {
+        position: relative; color: rgba(255,255,255,0.6);
+        font-weight: 700; font-size: 0.72rem;
+        letter-spacing: 1.8px; text-transform: uppercase;
+        padding: 9px 20px; border-radius: 40px;
+        transition: color 0.25s, background 0.25s;
+    }
+    .desktop-nav a::after {
+        content: ''; position: absolute; bottom: 6px; left: 50%;
+        transform: translateX(-50%); width: 0; height: 2px;
+        background: var(--glow); border-radius: 2px;
+        transition: width 0.3s; box-shadow: 0 0 8px var(--glow);
+    }
+    .desktop-nav a:hover { color: var(--white); background: rgba(255,255,255,0.06); }
+    .desktop-nav a:hover::after, .desktop-nav a.active::after { width: 20px; }
+    .desktop-nav a.active { color: var(--glow); background: rgba(168,255,120,0.08); }
+
+    .book-btn {
+        display: flex; align-items: center; gap: 8px;
+        background: var(--glow); color: #0a1408;
+        padding: 12px 28px; border-radius: 50px;
+        font-weight: 900; font-size: 0.72rem;
+        text-transform: uppercase; letter-spacing: 1.2px; white-space: nowrap;
+        transition: transform 0.2s, box-shadow 0.3s, background 0.2s;
+        box-shadow: 0 0 22px rgba(168,255,120,0.38), 0 4px 14px rgba(0,0,0,0.3);
+    }
+    .book-btn::before { content: '*'; font-size: 0.6rem; opacity: 0.7; }
+    .book-btn:hover { transform: scale(1.06) translateY(-1px); box-shadow: 0 0 44px rgba(168,255,120,0.6); background: #bcff90; }
+
+    .hamburger {
+        display: none; flex-direction: column;
+        justify-content: center; align-items: center; gap: 5px;
+        width: 42px; height: 42px; border-radius: 50%;
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .hamburger:hover { background: rgba(168,255,120,0.1); border-color: rgba(168,255,120,0.3); }
+    .hamburger span { display: block; width: 18px; height: 2px; background: var(--white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav-panel {
+        display: none; position: fixed; top: 86px; left: 50%;
+        transform: translateX(-50%) translateY(-6px);
+        width: min(88%, 380px);
+        background: rgba(6,10,5,0.97);
+        border: 1px solid rgba(168,255,120,0.18);
+        border-radius: 28px; backdrop-filter: blur(40px);
+        padding: 16px; z-index: 9998;
+        flex-direction: column; gap: 4px; opacity: 0;
+        transition: opacity 0.25s, transform 0.25s;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+    .mobile-nav-panel.active { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .mobile-nav-panel::before {
+        content: ''; display: block; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(168,255,120,0.2), transparent);
+        margin: 4px 12px 12px;
+    }
+    .mobile-nav-panel a {
+        color: rgba(255,255,255,0.75); font-weight: 700;
+        font-size: 0.82rem; text-transform: uppercase; letter-spacing: 2px;
+        padding: 14px 20px; border-radius: 14px;
+        transition: background 0.2s, color 0.2s, padding-left 0.2s;
+        display: flex; align-items: center; gap: 10px;
+    }
+    .mobile-nav-panel a::before { content: '-'; font-size: 0.6rem; color: var(--glow); opacity: 0; transition: opacity 0.2s; }
+    .mobile-nav-panel a:hover { background: rgba(168,255,120,0.07); color: var(--glow); padding-left: 24px; }
+    .mobile-nav-panel a:hover::before { opacity: 1; }
+    .mobile-nav-panel .mobile-book { margin-top: 8px; background: var(--glow); color: #0a1408; font-weight: 900; text-align: center; padding: 16px; border-radius: 14px; justify-content: center; letter-spacing: 1.5px; }
+    .mobile-nav-panel .mobile-book:hover { background: #bcff90; padding-left: 20px; color: #0a1408; }
+    .mobile-nav-panel .mobile-book::before { display: none; }
+
+    .marquee-wrap { overflow: hidden; background: var(--glow); padding: 14px 0; position: relative; z-index: 10; }
+    .marquee-track { display: flex; animation: marquee 30s linear infinite; width: max-content; }
+    .marquee-track span { color: #0a1408; font-weight: 900; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; padding: 0 40px; white-space: nowrap; }
+    .marquee-track span.dot { padding: 0; opacity: 0.4; font-size: 1rem; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .hero {
+        min-height: 100vh; display: flex; align-items: center; justify-content: center;
+        padding: 140px 5% 90px; position: relative;
+        overflow: hidden;
+    }
+    .hero-media {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        opacity: 0.42;
+        will-change: transform;
+    }
+    .hero-media::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(180deg, rgba(8,12,7,0.58) 0%, rgba(8,12,7,0.34) 26%, rgba(8,12,7,0.5) 100%),
+            radial-gradient(circle at center, rgba(13,18,9,0.14) 0%, rgba(13,18,9,0.7) 72%);
+    }
+    .hero-strip {
+        position: absolute;
+        left: -5%;
+        width: 110%;
+        display: flex;
+        gap: 18px;
+        will-change: transform;
+    }
+    .hero-strip.top {
+        top: 11%;
+        transform: rotate(-5deg);
+        animation: heroScrollLeft 34s linear infinite;
+    }
+    .hero-strip.bottom {
+        bottom: 10%;
+        transform: rotate(4deg);
+        animation: heroScrollRight 36s linear infinite;
+    }
+    .hero-shot {
+        flex: 0 0 290px;
+        height: 200px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+        background: rgba(255,255,255,0.03);
+    }
+    .hero-shot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05) contrast(1.02) brightness(0.82);
+    }
+    @keyframes heroScrollLeft {
+        from { transform: translateX(0) rotate(-5deg); }
+        to { transform: translateX(-32%) rotate(-5deg); }
+    }
+    @keyframes heroScrollRight {
+        from { transform: translateX(-32%) rotate(4deg); }
+        to { transform: translateX(0) rotate(4deg); }
+    }
+    .hero-deco {
+        position: absolute; border-radius: 50%;
+        border: 1px solid rgba(168,255,120,0.1);
+        animation: float 7s ease-in-out infinite; pointer-events: none;
+    }
+    .hero-deco:nth-child(1) { width: 360px; height: 360px; top: 10%; right: 3%; animation-delay: 0s; }
+    .hero-deco:nth-child(2) { width: 200px; height: 200px; bottom: 14%; left: 4%; animation-delay: 2.5s; }
+    .hero-deco:nth-child(3) { width: 110px; height: 110px; top: 32%; left: 9%; animation-delay: 4.5s; border-color: rgba(197,160,89,0.14); }
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-22px) rotate(4deg); } }
+
+    .hero-card {
+        background: var(--glass); border: 1px solid rgba(168,255,120,0.15);
+        backdrop-filter: blur(30px); border-radius: 48px;
+        padding: clamp(55px,8vw,105px) clamp(30px,6vw,85px);
+        text-align: center; max-width: 1100px; width: 100%;
+        box-shadow: 0 50px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(168,255,120,0.04) inset;
+        animation: heroUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards;
+        opacity: 0; position: relative; z-index: 1;
+    }
+    @keyframes heroUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-badge { display: inline-block; color: var(--gold); font-size: 0.72rem; font-weight: 700; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 30px; }
+
+    .hero-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: clamp(3.8rem,12vw,8rem);
+        line-height: 0.9; letter-spacing: 2px; color: var(--glow);
+        text-shadow: 0 0 80px rgba(168,255,120,0.22);
+    }
+    .hero-title .sub { display: block; font-family: 'Playfair Display', serif; font-style: italic; font-size: 0.38em; color: rgba(255,255,255,0.75); text-shadow: none; letter-spacing: 0; margin-top: 16px; }
+
+    .hero-desc { color: var(--w60); font-size: clamp(0.9rem,1.5vw,1.12rem); line-height: 1.9; max-width: 680px; margin: 34px auto 0; }
+
+    .hero-cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 48px; }
+
+    .hero-cta { display: inline-block; background: var(--white); color: var(--dark-sage); padding: 20px 58px; border-radius: 60px; font-weight: 900; font-size: 0.92rem; text-transform: uppercase; letter-spacing: 1.5px; box-shadow: 0 0 40px rgba(168,255,120,0.28); transition: background 0.25s, transform 0.2s, box-shadow 0.3s; }
+    .hero-cta:hover { background: var(--glow); transform: scale(1.06); box-shadow: 0 0 60px rgba(168,255,120,0.55); }
+
+    .hero-cta-ghost { display: inline-block; background: transparent; color: var(--white); padding: 20px 40px; border-radius: 60px; font-weight: 700; font-size: 0.88rem; text-transform: uppercase; letter-spacing: 1.5px; border: 1px solid rgba(255,255,255,0.2); transition: border-color 0.25s, color 0.25s, background 0.25s; }
+    .hero-cta-ghost:hover { border-color: var(--glow); color: var(--glow); background: rgba(168,255,120,0.06); }
+
+    .stats-bar { background: var(--bg-olive); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 60px 5%; }
+    .stats-inner { display: flex; justify-content: center; max-width: 1100px; margin: 0 auto; flex-wrap: wrap; }
+    .stat-item { flex: 1; min-width: 180px; text-align: center; padding: 30px 20px; position: relative; }
+    .stat-item + .stat-item::before { content: ''; position: absolute; left: 0; top: 20%; bottom: 20%; width: 1px; background: linear-gradient(to bottom, transparent, rgba(168,255,120,0.2), transparent); }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,6vw,4.5rem); color: var(--glow); text-shadow: 0 0 30px rgba(168,255,120,0.3); line-height: 1; }
+    .stat-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--w60); margin-top: 8px; }
+
+    section { padding: 110px 5%; }
+    .section-label { display: block; color: var(--glow); font-size: 0.7rem; font-weight: 800; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 14px; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.8rem,7vw,5rem); line-height: 1; letter-spacing: 1px; margin-bottom: 70px; }
+    .section-title .accent { color: var(--glow); text-shadow: 0 0 30px rgba(168,255,120,0.32); }
+
+    .reveal {
+        opacity: 0;
+        transform: translate3d(0, 38px, 0) scale(0.985);
+        transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+    }
+    .reveal.visible {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill { display: inline-block; background: rgba(168,255,120,0.09); color: var(--glow); border: 1px solid rgba(168,255,120,0.2); padding: 6px 16px; border-radius: 50px; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
+    .pill-white { background: var(--w08); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.1); }
+
+    #why-us { text-align: center; background: var(--bg-deep); }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .why-card {
+        background: var(--w08); border: 1px solid rgba(255,255,255,0.07);
+        border-radius: var(--r40); padding: 48px 40px 40px;
+        text-align: left; position: relative;
+        display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
+        transition: border-color 0.35s, background 0.35s, transform 0.35s;
+        min-height: 260px; overflow: hidden;
+    }
+    .why-card::before { content: ''; position: absolute; top: -60%; left: -60%; width: 220%; height: 220%; background: radial-gradient(circle, rgba(168,255,120,0.06) 0%, transparent 60%); opacity: 0; transition: opacity 0.4s; pointer-events: none; }
+    .why-card:hover { border-color: rgba(168,255,120,0.38); background: rgba(168,255,120,0.04); transform: translateY(-10px); }
+    .why-card:hover::before { opacity: 1; }
+    .card-num { position: absolute; top: 24px; right: 32px; font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; color: rgba(255,255,255,0.04); line-height: 1; }
+    .why-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 10px; }
+    .why-card p  { font-size: 0.9rem; line-height: 1.7; color: var(--w60); }
+
+    #founder { background: var(--bg-olive); text-align: center; }
+    .founder-wrap { display: flex; align-items: center; gap: 60px; background: var(--glass); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r40); padding: 60px; max-width: 1100px; margin: 0 auto; text-align: left; backdrop-filter: blur(20px); }
+    .founder-photo { flex-shrink: 0; width: 300px; height: 380px; border-radius: 24px; background: url('my-photo.jpg') center/cover no-repeat, #2a3527; border: 2px solid rgba(168,255,120,0.3); box-shadow: 0 0 60px rgba(168,255,120,0.1), 0 30px 60px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
+    .founder-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(168,255,120,0.08) 0%, transparent 50%); }
+    .founder-name { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; letter-spacing: 2px; line-height: 1; margin: 0 0 20px; }
+    .founder-bio { color: var(--w60); font-size: 1rem; line-height: 1.85; margin-bottom: 28px; }
+
+    #coverage { text-align: center; }
+    .cov-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .cov-card { background: var(--w08); border: 1px solid rgba(255,255,255,0.07); border-radius: var(--r40); padding: 50px 40px 44px; text-align: left; position: relative; transition: border-color 0.35s, transform 0.35s; }
+    .cov-card:hover { border-color: rgba(168,255,120,0.38); transform: translateY(-8px); }
+    .cov-card.featured { border: 2px solid var(--glow); background: linear-gradient(145deg, #1b2419 0%, #2d3e28 100%); }
+    .cov-badge { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); background: var(--glow); color: #1b2419; font-size: 0.65rem; font-weight: 900; letter-spacing: 1.5px; text-transform: uppercase; padding: 8px 20px; border-radius: 30px; white-space: nowrap; }
+    .cov-icon { width: 52px; height: 52px; background: rgba(168,255,120,0.08); border: 1px solid rgba(168,255,120,0.2); border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 28px; }
+    .cov-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
+    .cov-card p  { color: var(--w60); font-size: 0.9rem; line-height: 1.65; margin-bottom: 28px; }
+    .cov-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: var(--w08); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.85); padding: 7px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
+    .featured .tag { background: rgba(168,255,120,0.08); border-color: rgba(168,255,120,0.25); color: var(--glow); }
+
+    #testimonials { background: var(--bg-deep); text-align: center; overflow: hidden; }
+    .testi-track-wrap { overflow: hidden; position: relative; padding-bottom: 10px; }
+    .testi-track-wrap::before, .testi-track-wrap::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
+    .testi-track-wrap::before { left: 0;  background: linear-gradient(to right, var(--bg-deep), transparent); }
+    .testi-track-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg-deep), transparent); }
+    .testi-track { display: flex; gap: 24px; animation: testiScroll 42s linear infinite; width: max-content; }
+    .testi-track:hover { animation-play-state: paused; }
+    @keyframes testiScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .testi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; padding: 36px 32px; width: 340px; flex-shrink: 0; text-align: left; transition: border-color 0.3s; }
+    .testi-card:hover { border-color: rgba(168,255,120,0.3); }
+    .testi-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 16px; }
+    .testi-quote { font-size: 0.95rem; line-height: 1.75; color: rgba(255,255,255,0.75); margin-bottom: 24px; font-style: italic; }
+    .testi-quote::before { content: '"'; color: var(--glow); font-size: 1.4rem; line-height: 0; vertical-align: -0.3em; margin-right: 4px; }
+    .testi-author { display: flex; align-items: center; gap: 14px; }
+    .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--dark-sage), var(--glow)); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem; color: #0a1408; flex-shrink: 0; }
+    .testi-name { font-weight: 800; font-size: 0.85rem; }
+    .testi-role { font-size: 0.72rem; color: var(--w60); margin-top: 2px; }
+
+    #process { background: var(--bg-olive); text-align: center; }
+    .process-grid { display: flex; gap: 0; max-width: 1100px; margin: 0 auto; position: relative; flex-wrap: wrap; }
+    .process-grid::before { content: ''; position: absolute; top: 44px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, rgba(168,255,120,0.25) 20%, rgba(168,255,120,0.25) 80%, transparent); }
+    .process-step { flex: 1; min-width: 200px; padding: 0 20px; text-align: center; }
+    .process-num { width: 88px; height: 88px; border-radius: 50%; background: var(--glass); border: 1px solid rgba(168,255,120,0.25); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--glow); margin: 0 auto 28px; box-shadow: 0 0 30px rgba(168,255,120,0.1); position: relative; z-index: 1; transition: background 0.3s, box-shadow 0.3s; }
+    .process-step:hover .process-num { background: rgba(168,255,120,0.1); box-shadow: 0 0 50px rgba(168,255,120,0.25); }
+    .process-step h3 { font-size: 1rem; font-weight: 800; margin-bottom: 10px; }
+    .process-step p  { font-size: 0.85rem; color: var(--w60); line-height: 1.7; }
+
+    #portfolio-cta { background: var(--bg-deep); text-align: center; }
+    .portfolio-box { max-width: 900px; margin: 0 auto; padding: clamp(60px,8vw,100px) clamp(30px,6vw,80px); background: rgba(255,255,255,0.02); border: 1px solid rgba(168,255,120,0.12); border-radius: var(--r60); position: relative; overflow: hidden; }
+    .portfolio-box::before { content: ''; position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(168,255,120,0.07) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+    .portfolio-logo { height: 80px; margin: 0 auto 60px; filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(60deg); position: relative; z-index: 1; }
+    .portfolio-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem,7vw,5rem); letter-spacing: 2px; line-height: 1; position: relative; z-index: 1; }
+    .portfolio-box h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1.5rem,3.5vw,2.2rem); color: rgba(255,255,255,0.7); font-weight: 400; margin: 14px 0 26px; position: relative; z-index: 1; }
+    .portfolio-box p { color: var(--w60); font-size: 1rem; line-height: 1.8; max-width: 580px; margin: 0 auto 44px; position: relative; z-index: 1; }
+    .insta-btn { display: inline-block; background: var(--glow); color: var(--bg-deep); padding: 20px 52px; border-radius: 60px; font-weight: 900; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 35px rgba(168,255,120,0.3); transition: background 0.25s, transform 0.2s, box-shadow 0.3s; position: relative; z-index: 1; }
+    .insta-btn:hover { background: var(--white); transform: scale(1.05); box-shadow: 0 0 55px rgba(168,255,120,0.5); }
+    .insta-handle { display: block; margin-top: 22px; color: var(--glow); font-weight: 700; font-size: 0.85rem; opacity: 0.75; transition: opacity 0.2s; position: relative; z-index: 1; }
+    .insta-handle:hover { opacity: 1; }
+
+    #gallery { background: #0f1510; text-align: center; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1100px; margin: 0 auto; }
+    .gallery-item:first-child { grid-row: span 2; aspect-ratio: unset; }
+    .gallery-item { border-radius: 18px; overflow: hidden; aspect-ratio: 4/3; background: #1a2418; position: relative; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.5s ease; }
+    .gallery-item::after { content: '+'; position: absolute; inset: 0; background: rgba(10,20,8,0.55); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--glow); opacity: 0; transition: opacity 0.4s; }
+    .gallery-item:hover img { transform: scale(1.1); filter: brightness(0.7); }
+    .gallery-item:hover::after { opacity: 1; }
+
+    #custom-package {
+        background:
+            radial-gradient(circle at top right, rgba(168,255,120,0.08), transparent 35%),
+            linear-gradient(180deg, #101710 0%, #141d13 100%);
+    }
+    .package-shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 28px;
+        align-items: stretch;
+    }
+    .package-copy,
+    .package-form-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(168,255,120,0.12);
+        border-radius: 34px;
+        backdrop-filter: blur(18px);
+        box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    }
+    .package-copy {
+        padding: 44px;
+        position: relative;
+        overflow: hidden;
+    }
+    .package-copy::before {
+        content: '';
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        top: -90px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(168,255,120,0.12), transparent 70%);
+        pointer-events: none;
+    }
+    .package-copy p {
+        color: var(--w60);
+        line-height: 1.85;
+        font-size: 0.95rem;
+    }
+    .package-points {
+        margin-top: 28px;
+        display: grid;
+        gap: 16px;
+    }
+    .package-point {
+        padding: 18px 18px 18px 22px;
+        border-radius: 22px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.03);
+    }
+    .package-point strong {
+        display: block;
+        color: var(--white);
+        font-size: 0.98rem;
+        margin-bottom: 6px;
+    }
+    .package-point span {
+        color: var(--w60);
+        font-size: 0.88rem;
+        line-height: 1.7;
+    }
+    .package-mini-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 28px;
+    }
+    .package-stat {
+        padding: 18px 14px;
+        border-radius: 22px;
+        text-align: center;
+        background: rgba(168,255,120,0.05);
+        border: 1px solid rgba(168,255,120,0.14);
+    }
+    .package-stat strong {
+        display: block;
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 2rem;
+        letter-spacing: 1px;
+        color: var(--glow);
+        line-height: 1;
+    }
+    .package-stat span {
+        color: rgba(255,255,255,0.72);
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 1.8px;
+    }
+    .package-form-card {
+        padding: 38px;
+    }
+    .package-topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+    .package-topline h3 {
+        font-size: 1.45rem;
+        font-weight: 800;
+    }
+    .package-topline span {
+        color: var(--glow);
+        font-size: 0.74rem;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 800;
+    }
+    .package-form {
+        display: grid;
+        gap: 18px;
+    }
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+    .field {
+        display: grid;
+        gap: 10px;
+    }
+    .field label {
+        color: rgba(255,255,255,0.84);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 1.8px;
+        font-weight: 700;
+    }
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(9,13,8,0.85);
+        color: var(--white);
+        border-radius: 18px;
+        padding: 16px 18px;
+        font: inherit;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .field textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+        border-color: rgba(168,255,120,0.45);
+        box-shadow: 0 0 0 4px rgba(168,255,120,0.08);
+        transform: translateY(-1px);
+    }
+    .field-full { grid-column: 1 / -1; }
+    .budget-options {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+    .budget-option {
+        position: relative;
+    }
+    .budget-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .budget-option span {
+        display: block;
+        padding: 15px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(255,255,255,0.03);
+        color: rgba(255,255,255,0.76);
+        text-align: center;
+        font-size: 0.84rem;
+        font-weight: 700;
+        transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+        cursor: pointer;
+    }
+    .budget-option input:checked + span,
+    .budget-option span:hover {
+        border-color: rgba(168,255,120,0.45);
+        background: rgba(168,255,120,0.12);
+        color: var(--glow);
+        transform: translateY(-2px);
+    }
+    .package-submit {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--glow);
+        color: #0a1408;
+        padding: 18px 28px;
+        font-size: 0.9rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        box-shadow: 0 0 28px rgba(168,255,120,0.28);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .package-submit:hover {
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 0 44px rgba(168,255,120,0.45);
+        background: #bcff90;
+    }
+    .package-note {
+        color: rgba(255,255,255,0.5);
+        font-size: 0.8rem;
+        line-height: 1.7;
+    }
+    #terms-conditions {
+        background:
+            radial-gradient(circle at left top, rgba(168,255,120,0.08), transparent 34%),
+            linear-gradient(180deg, #111911 0%, #0d130d 100%);
+    }
+    .terms-panel {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: clamp(28px, 4vw, 48px);
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(168,255,120,0.12);
+        border-radius: 36px;
+        box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    }
+    .terms-intro {
+        max-width: 760px;
+        color: var(--w60);
+        line-height: 1.85;
+        margin: 0 0 34px;
+    }
+    .terms-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+    .term-card {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 24px;
+        padding: 22px 22px 20px;
+    }
+    .term-card h3 {
+        color: var(--glow);
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+    .term-card p {
+        color: rgba(255,255,255,0.72);
+        font-size: 0.9rem;
+        line-height: 1.8;
+    }
+    .terms-endnote {
+        margin-top: 22px;
+        color: rgba(255,255,255,0.52);
+        font-size: 0.83rem;
+        line-height: 1.75;
+    }
+
+    footer { background: #080c06; border-top: 1px solid rgba(255,255,255,0.05); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 70px 5% 40px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 60px; }
+    .footer-brand img { height: 50px; margin-bottom: 20px; filter: brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(60deg) opacity(0.8); }
+    .footer-brand p { color: var(--w60); font-size: 0.88rem; line-height: 1.75; max-width: 320px; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--glow); margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { color: var(--w60); font-size: 0.88rem; transition: color 0.2s; font-weight: 600; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-social { display: flex; gap: 12px; margin-top: 24px; }
+    .social-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--w08); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: var(--w60); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+    .social-btn:hover { background: rgba(168,255,120,0.12); border-color: rgba(168,255,120,0.3); color: var(--glow); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding: 24px 5%; display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { color: rgba(255,255,255,0.28); font-size: 0.78rem; }
+    .footer-bottom a { color: var(--glow); font-weight: 700; }
+    .made-with { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.28); font-size: 0.75rem; }
+    .heart { color: #ff6b6b; animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+    .mobile-sticky-wa {
+        display: none;
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 9997;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #a8ff78 0%, #d2ffb5 100%);
+        color: #0a1408;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 18px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.12) inset;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .mobile-sticky-wa:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 44px rgba(0,0,0,0.36), 0 0 0 1px rgba(255,255,255,0.18) inset;
+    }
+    .mobile-sticky-wa .icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(10,20,8,0.12);
+        font-size: 1rem;
+        flex-shrink: 0;
+    }
+    .mobile-sticky-wa .text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.05;
+    }
+    .mobile-sticky-wa .text small {
+        font-size: 0.58rem;
+        letter-spacing: 1.1px;
+        opacity: 0.72;
+        margin-top: 3px;
+    }
+    .gallery-item,
+    .social-btn,
+    .book-btn,
+    .hero-cta,
+    .hero-cta-ghost,
+    .package-submit,
+    .mobile-sticky-wa {
+        touch-action: manipulation;
+    }
+
+    @media (max-width: 980px) {
+        .package-shell { grid-template-columns: 1fr; }
+        .budget-options { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+        header {
+            top: 12px;
+            width: min(94%, 1180px);
+            padding: 10px 10px 10px 14px;
+            gap: 10px;
+        }
+        .header-logo img { height: 36px; }
+        .desktop-nav { display: none; }
+        .hamburger   { display: flex; }
+        .book-btn {
+            padding: 11px 18px;
+            font-size: 0.66rem;
+            letter-spacing: 1px;
+        }
+        .mobile-nav-panel {
+            top: 74px;
+            width: min(92%, 380px);
+            padding: 12px;
+        }
+        .hero {
+            min-height: auto;
+            padding: 122px 5% 72px;
+        }
+        .hero-shot {
+            flex-basis: 230px;
+            height: 160px;
+            border-radius: 22px;
+        }
+        .hero-card {
+            border-radius: 34px;
+            padding: clamp(36px, 7vw, 56px) clamp(22px, 5vw, 36px);
+        }
+        .hero-title {
+            font-size: clamp(3.2rem, 11vw, 5.3rem);
+            letter-spacing: 1px;
+        }
+        .hero-desc {
+            margin-top: 24px;
+            line-height: 1.75;
+        }
+        .hero-cta-group {
+            margin-top: 34px;
+            gap: 12px;
+        }
+        .hero-cta,
+        .hero-cta-ghost {
+            padding: 17px 30px;
+        }
+        .stats-bar { padding: 42px 5%; }
+        .stat-item { min-width: 150px; padding: 22px 14px; }
+        section { padding: 88px 5%; }
+        .section-title { margin-bottom: 52px; }
+        .founder-wrap { flex-direction: column; text-align: center; padding: 40px 28px; }
+        .founder-photo { width: 100%; height: 280px; }
+        .founder-info { text-align: center; }
+        .process-grid { flex-direction: column; gap: 32px; }
+        .process-grid::before { display: none; }
+        .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+        .footer-brand { grid-column: span 2; }
+        .form-grid { grid-template-columns: 1fr; }
+        .package-mini-stats { grid-template-columns: 1fr; }
+        .terms-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+        section[id], main[id] { scroll-margin-top: 92px; }
+        header {
+            top: 10px;
+            width: min(96%, 1180px);
+            padding: 8px 8px 8px 12px;
+            border-radius: 24px;
+        }
+        .header-logo img { height: 30px; }
+        .book-btn {
+            padding: 10px 14px;
+            font-size: 0.6rem;
+            letter-spacing: 0.8px;
+            gap: 6px;
+        }
+        .book-btn::before { display: none; }
+        .hamburger {
+            width: 38px;
+            height: 38px;
+        }
+        .hamburger span { width: 16px; }
+        .mobile-nav-panel {
+            top: 66px;
+            width: min(94%, 360px);
+            border-radius: 22px;
+            padding: 10px;
+        }
+        .mobile-nav-panel a {
+            font-size: 0.75rem;
+            letter-spacing: 1.4px;
+            padding: 12px 14px;
+        }
+        .mobile-nav-panel .mobile-book {
+            padding: 14px;
+        }
+        .mobile-sticky-wa {
+            display: inline-flex;
+        }
+        section { padding: 62px 5%; }
+        .section-title {
+            font-size: clamp(2.2rem, 10vw, 3.2rem);
+            margin-bottom: 36px;
+        }
+        .section-label {
+            font-size: 0.62rem;
+            letter-spacing: 3.5px;
+            margin-bottom: 10px;
+        }
+        body {
+            cursor: auto;
+            padding-bottom: 92px;
+        }
+        #cursor-dot, #cursor-ring { display: none; }
+        .marquee-wrap {
+            margin-top: 74px !important;
+            padding: 11px 0;
+        }
+        .marquee-track span {
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            padding: 0 24px;
+        }
+        .hero {
+            padding: 108px 4.5% 58px;
+        }
+        .hero-media {
+            opacity: 0.34;
+        }
+        .hero-strip {
+            gap: 12px;
+            left: -12%;
+            width: 124%;
+        }
+        .hero-strip.top {
+            top: 10%;
+        }
+        .hero-strip.bottom {
+            bottom: 9%;
+        }
+        .hero-shot {
+            flex-basis: 190px;
+            height: 132px;
+            border-radius: 18px;
+        }
+        .hero-card {
+            border-radius: 28px;
+            padding: 30px 18px;
+        }
+        .hero-badge {
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+        .hero-title {
+            font-size: clamp(2.6rem, 15vw, 4rem);
+            line-height: 0.95;
+        }
+        .hero-title .sub {
+            margin-top: 10px;
+            font-size: 0.34em;
+        }
+        .hero-desc {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            margin-top: 18px;
+        }
+        .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .gallery-item:first-child { grid-row: unset; aspect-ratio: 4/3; }
+        .cards-grid, .cov-grid { grid-template-columns: 1fr; }
+        .stats-inner { gap: 4px; }
+        .stat-item + .stat-item::before { display: none; }
+        .stats-bar { padding: 30px 5%; }
+        .stat-item {
+            min-width: calc(50% - 8px);
+            padding: 18px 10px;
+        }
+        .stat-num { font-size: clamp(2.2rem, 10vw, 3rem); }
+        .stat-label {
+            font-size: 0.62rem;
+            letter-spacing: 1.6px;
+        }
+        .hero-cta-group { flex-direction: column; align-items: center; gap: 10px; }
+        .hero-cta, .hero-cta-ghost {
+            width: 100%;
+            max-width: 100%;
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.8rem;
+        }
+        .why-card,
+        .cov-card,
+        .testi-card,
+        .term-card {
+            border-radius: 22px;
+            padding: 24px 20px;
+        }
+        .testi-track {
+            animation-duration: 54s;
+        }
+        .testi-track-wrap::before,
+        .testi-track-wrap::after {
+            width: 54px;
+        }
+        .founder-wrap {
+            padding: 28px 18px;
+            border-radius: 28px;
+            gap: 28px;
+        }
+        .founder-photo { height: 240px; }
+        .founder-name { font-size: 3rem; }
+        .process-step { padding: 0 8px; }
+        .process-num {
+            width: 72px;
+            height: 72px;
+            margin-bottom: 18px;
+        }
+        .package-copy,
+        .package-form-card {
+            padding: 22px 18px;
+            border-radius: 24px;
+        }
+        .package-topline {
+            align-items: flex-start;
+            flex-direction: column;
+            margin-bottom: 18px;
+        }
+        .package-topline h3 { font-size: 1.2rem; }
+        .package-copy h3 {
+            font-size: 2.35rem !important;
+        }
+        .package-point {
+            padding: 16px 16px 16px 18px;
+            border-radius: 18px;
+        }
+        .field {
+            gap: 8px;
+        }
+        .field label {
+            font-size: 0.72rem;
+            letter-spacing: 1.3px;
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 14px 15px;
+            border-radius: 14px;
+            font-size: 16px;
+        }
+        .budget-option span {
+            padding: 14px 12px;
+            border-radius: 14px;
+            font-size: 0.78rem;
+        }
+        .package-submit {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 0.82rem;
+        }
+        .terms-panel {
+            padding: 24px 18px;
+            border-radius: 26px;
+        }
+        .terms-intro,
+        .terms-endnote {
+            font-size: 0.88rem;
+        }
+        .footer-inner {
+            grid-template-columns: 1fr;
+            gap: 32px;
+            padding-bottom: 18px;
+        }
+        .footer-brand { grid-column: unset; }
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 10px;
+        }
+        .hero-deco { display: none; }
+    }
+    @media (max-width: 420px) {
+        section[id], main[id] { scroll-margin-top: 86px; }
+        .book-btn {
+            padding: 9px 12px;
+            font-size: 0.56rem;
+        }
+        .mobile-sticky-wa {
+            right: 12px;
+            left: 12px;
+            bottom: 12px;
+            justify-content: center;
+            padding: 13px 16px;
+        }
+        body {
+            padding-bottom: 86px;
+        }
+        .hero-media {
+            display: block;
+            opacity: 0.3;
+        }
+        .hero-strip {
+            gap: 8px;
+            left: -26%;
+            width: 152%;
+        }
+        .hero-strip.top {
+            top: 14%;
+            animation-duration: 34s;
+        }
+        .hero-strip.bottom {
+            display: flex;
+            bottom: 12%;
+            animation-duration: 36s;
+        }
+        .hero-shot {
+            flex-basis: 132px;
+            height: 98px;
+            border-radius: 16px;
+        }
+        .hero-media::after {
+            background:
+                linear-gradient(180deg, rgba(8,12,7,0.5) 0%, rgba(8,12,7,0.18) 30%, rgba(8,12,7,0.56) 100%),
+                radial-gradient(circle at center, rgba(13,18,9,0.06) 0%, rgba(13,18,9,0.56) 76%);
+        }
+        .hero-title {
+            font-size: clamp(2.3rem, 14vw, 3.4rem);
+        }
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+        .stat-item {
+            min-width: 100%;
+        }
+        .testi-card {
+            width: 260px;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .hero-strip,
+        .testi-track,
+        .marquee-track,
+        .hero-deco,
+        .heart {
+            animation: none !important;
+        }
+        .reveal,
+        .hero-card,
+        .gallery-item img,
+        .book-btn,
+        .hero-cta,
+        .hero-cta-ghost,
+        .package-submit,
+        .mobile-sticky-wa {
+            transition: none !important;
+        }
+    }
+    </style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<canvas id="particle-canvas"></canvas>
+
+<header id="site-header">
+    <div class="header-logo"><img src="logo.png" alt="Tony Photography"></div>
+    <nav class="desktop-nav">
+        <a href="#home">Home</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#founder">Founder</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#custom-package">Package</a>
+    </nav>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    <a href="https://wa.me/919989920100" class="book-btn">Book Now</a>
+</header>
+
+<nav class="mobile-nav-panel" id="mobileNav">
+    <a href="#home">Home</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#founder">Founder</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#custom-package">Custom Package</a>
+    <a href="https://wa.me/919989920100" class="mobile-book">Book Now *</a>
+</nav>
+
+<div class="marquee-wrap" style="margin-top:84px;">
+    <div class="marquee-track">
+        <span>Premium Cinematic Photography</span><span class="dot">*</span>
+        <span>Wedding Films</span><span class="dot">*</span>
+        <span>Brand Visuals</span><span class="dot">*</span>
+        <span>4K Color Grading</span><span class="dot">*</span>
+        <span>Hyderabad India</span><span class="dot">*</span>
+        <span>Next-Day Delivery</span><span class="dot">*</span>
+        <span>Cinematic Storytelling</span><span class="dot">*</span>
+        <span>Editorial Edits</span><span class="dot">*</span>
+        <span>Premium Cinematic Photography</span><span class="dot">*</span>
+        <span>Wedding Films</span><span class="dot">*</span>
+        <span>Brand Visuals</span><span class="dot">*</span>
+        <span>4K Color Grading</span><span class="dot">*</span>
+        <span>Hyderabad India</span><span class="dot">*</span>
+        <span>Next-Day Delivery</span><span class="dot">*</span>
+        <span>Cinematic Storytelling</span><span class="dot">*</span>
+        <span>Editorial Edits</span><span class="dot">*</span>
+    </div>
+</div>
+
+<main id="home" class="hero">
+    <div class="hero-media" aria-hidden="true">
+        <div class="hero-strip top">
+            <div class="hero-shot"><img src="img1.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img2.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img3.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img4.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img5.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img6.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img1.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img2.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img3.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img4.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img5.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img6.jpg" alt=""></div>
+        </div>
+        <div class="hero-strip bottom">
+            <div class="hero-shot"><img src="img7.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img8.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img9.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img3.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img5.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img7.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img8.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img9.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img3.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img5.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img7.jpg" alt=""></div>
+            <div class="hero-shot"><img src="img8.jpg" alt=""></div>
+        </div>
+    </div>
+    <div class="hero-deco"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-deco"></div>
+    <div class="hero-card">
+        <span class="hero-badge">India's Premium Cinematic Shoots</span>
+        <h1 class="hero-title">YOU DREAM IT,<br>WE FRAME IT.<span class="sub">From First Idea to Forever Frame.</span></h1>
+        <p class="hero-desc">Specializing in high-contrast digital illustrations and photography, defining grit and dynamic lighting for weddings and commercial events.</p>
+        <div class="hero-cta-group">
+            <a href="https://wa.me/919989920100" class="hero-cta">Book Your Shoot</a>
+            <a href="#gallery" class="hero-cta-ghost">View Gallery</a>
+        </div>
+    </div>
+</main>
+
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat-item reveal"><div class="stat-num" data-target="500">0</div><div class="stat-label">Events Covered</div></div>
+        <div class="stat-item reveal"><div class="stat-num" data-target="8">0</div><div class="stat-label">Years Experience</div></div>
+        <div class="stat-item reveal"><div class="stat-num" data-target="300">0</div><div class="stat-label">Happy Clients</div></div>
+        <div class="stat-item reveal"><div class="stat-num" data-target="50">0</div><div class="stat-label">Cities Across India</div></div>
+    </div>
+</div>
+
+<section id="why-us">
+    <div style="text-align:center;"><h2 class="section-title">WHY CLIENTS <span class="accent">CHOOSE US</span></h2></div>
+    <div class="cards-grid">
+        <div class="why-card reveal"><span class="card-num">01</span><div><h3>Cinematic Edge</h3><p>Digital illustrations with a powerful movie-like aesthetic that grabs attention instantly.</p></div><div class="pills"><span class="pill">Gritty Texture</span><span class="pill">Dynamic Lighting</span></div></div>
+        <div class="why-card reveal"><span class="card-num">02</span><div><h3>Precision Delivery</h3><p>Fast-paced workflows ensure your social-ready content is ready before the hype dies down.</p></div><div class="pills"><span class="pill">Next-Day Delivery</span><span class="pill">Social Ready</span></div></div>
+        <div class="why-card reveal"><span class="card-num">03</span><div><h3>Artist's Vision</h3><p>Custom-crafted shoots designed to match your unique brand identity and personal narrative.</p></div><div class="pills"><span class="pill">Custom Edits</span><span class="pill">Unique Style</span></div></div>
+        <div class="why-card reveal"><span class="card-num">04</span><div><h3>Premium Gear</h3><p>High-end cinema tools ensure the highest resolution and color depth for every frame.</p></div><div class="pills"><span class="pill">4K Quality</span><span class="pill">Color Grading</span></div></div>
+        <div class="why-card reveal"><span class="card-num">05</span><div><h3>Global Experience</h3><p>Trusted across India for grand events, weddings, and high-profile commercial projects.</p></div><div class="pills"><span class="pill">Event Coverage</span><span class="pill">Grand Scale</span></div></div>
+        <div class="why-card reveal"><span class="card-num">06</span><div><h3>Story First</h3><p>We focus on the narrative, ensuring every image resonates deeply with your audience.</p></div><div class="pills"><span class="pill">Storytelling</span><span class="pill">Emotional Depth</span></div></div>
+    </div>
+</section>
+
+<section id="founder">
+    <div style="text-align:center;"><h2 class="section-title">MEET THE <span class="accent">FOUNDER</span></h2></div>
+    <div class="founder-wrap reveal">
+        <div class="founder-photo"></div>
+        <div class="founder-info">
+            <span class="pill" style="margin-bottom:20px;display:inline-block;">Core Creative</span>
+            <h2 class="founder-name">Tony</h2>
+            <p class="founder-bio">Hi, I'm Tony, specialist in cinematic digital illustrations and photography. I help brands and individuals stand out with gritty textures, powerful lighting, and a dramatic aesthetic inspired by modern cinema. Every image is custom-crafted to ensure your narrative demands attention.</p>
+            <div class="pills"><span class="pill pill-white">Visionary</span><span class="pill pill-white">Cinematic Illustrator</span><span class="pill pill-white">Visual Storyteller</span></div>
+        </div>
+    </div>
+</section>
+
+<section id="process">
+    <div style="text-align:center;">
+        <span class="section-label">Simple Process</span>
+        <h2 class="section-title">HOW IT <span class="accent">WORKS</span></h2>
+    </div>
+    <div class="process-grid">
+        <div class="process-step reveal"><div class="process-num">01</div><h3>Consult</h3><p>Tell us your vision, date, and event type. We'll plan the perfect shoot concept together.</p></div>
+        <div class="process-step reveal"><div class="process-num">02</div><h3>Capture</h3><p>We arrive with full cinema-grade gear and capture every moment with dramatic precision.</p></div>
+        <div class="process-step reveal"><div class="process-num">03</div><h3>Edit</h3><p>Every frame is colour-graded and retouched to our signature cinematic aesthetic.</p></div>
+        <div class="process-step reveal"><div class="process-num">04</div><h3>Deliver</h3><p>Receive your polished photos and films fast, ready to share, post, and treasure forever.</p></div>
+    </div>
+</section>
+
+<section id="coverage" style="background:var(--bg-olive);">
+    <div style="text-align:center;">
+        <span class="section-label">Coverage Map</span>
+        <h2 class="section-title">What We <span class="accent">Cover</span></h2>
+        <p style="max-width:680px;margin:0 auto 60px;color:var(--w60);line-height:1.8;">From intimate private milestones to high-octane public rallies, we weave professional storytelling into every frame.</p>
+    </div>
+    <div class="cov-grid">
+        <div class="cov-card reveal"><div class="cov-icon">🥂</div><h3>Vibe-Driven Milestones</h3><p>High-energy aesthetic captures for your most important personal chapters and lifestyle moments.</p><div class="cov-tags"><span class="tag">Birthdays</span><span class="tag">Baby Showers</span><span class="tag">Anniversaries</span><span class="tag">Housewarming</span><span class="tag">Engagements</span></div></div>
+        <div class="cov-card featured reveal"><div class="cov-badge">Most Popular</div><div class="cov-icon">📸</div><h3>Grand Cinematic Unions</h3><p>Our premier storytelling service for heritage weddings, featuring dramatic lighting and editorial-grade edits.</p><div class="cov-tags"><span class="tag">Candid Reels</span><span class="tag">Films</span><span class="tag">Highlights</span><span class="tag">Haldi & Mehendi</span><span class="tag">Sangeet</span></div></div>
+        <div class="cov-card reveal"><div class="cov-icon">⚡</div><h3>Impactful Brand Narrative</h3><p>Powerful visual assets for product launches and corporate identity that demand professional engagement.</p><div class="cov-tags"><span class="tag">Business Launches</span><span class="tag">Political Rallies</span><span class="tag">Brand Promotions</span><span class="tag">Conferences</span><span class="tag">Teasers</span></div></div>
+    </div>
+</section>
+
+<section id="testimonials">
+    <div style="text-align:center;">
+        <span class="section-label">Client Love</span>
+        <h2 class="section-title" style="margin-bottom:50px;">WHAT PEOPLE <span class="accent">SAY</span></h2>
+    </div>
+    <div class="testi-track-wrap">
+        <div class="testi-track">
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony captured our wedding perfectly. Every frame felt like a Bollywood film, cinematic, emotional, unforgettable.</p><div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Riya Sharma</div><div class="testi-role">Wedding Client · Hyderabad</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The product shoot exceeded every expectation. The lighting and colour grading elevated our brand instantly.</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Brand Director · Mumbai</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Delivered next day as promised. Jaw-dropping quality. My birthday reel went viral on Instagram.</p><div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya Reddy</div><div class="testi-role">Birthday Event · Bangalore</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony understood our political rally vision and made it look like a presidential campaign. Outstanding.</p><div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Suresh Naidu</div><div class="testi-role">Political Campaign · Telangana</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The sangeet and haldi videos were so beautifully edited. Our family still watches them every anniversary.</p><div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Meera Kapoor</div><div class="testi-role">Wedding Client · Delhi</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Our conference looked like an Apple keynote after Tony's edit. Absolutely premium quality work.</p><div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karthik Rao</div><div class="testi-role">Corporate Event · Chennai</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony captured our wedding perfectly. Every frame felt like a Bollywood film, cinematic, emotional, unforgettable.</p><div class="testi-author"><div class="testi-avatar">R</div><div><div class="testi-name">Riya Sharma</div><div class="testi-role">Wedding Client · Hyderabad</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The product shoot exceeded every expectation. The lighting and colour grading elevated our brand instantly.</p><div class="testi-author"><div class="testi-avatar">A</div><div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Brand Director · Mumbai</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Delivered next day as promised. Jaw-dropping quality. My birthday reel went viral on Instagram.</p><div class="testi-author"><div class="testi-avatar">P</div><div><div class="testi-name">Priya Reddy</div><div class="testi-role">Birthday Event · Bangalore</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Tony understood our political rally vision and made it look like a presidential campaign. Outstanding.</p><div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Suresh Naidu</div><div class="testi-role">Political Campaign · Telangana</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">The sangeet and haldi videos were so beautifully edited. Our family still watches them every anniversary.</p><div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Meera Kapoor</div><div class="testi-role">Wedding Client · Delhi</div></div></div></div>
+            <div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-quote">Our conference looked like an Apple keynote after Tony's edit. Absolutely premium quality work.</p><div class="testi-author"><div class="testi-avatar">K</div><div><div class="testi-name">Karthik Rao</div><div class="testi-role">Corporate Event · Chennai</div></div></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="portfolio-cta">
+    <div class="portfolio-box reveal">
+        <img src="logo1.PNG" alt="Tony Photography Logo" class="portfolio-logo">
+        <span class="section-label">Portfolio</span>
+        <h2>Check My Work</h2>
+        <h3>Latest Cinematic Drops</h3>
+        <p>Experience the full gallery of high-contrast visuals, raw emotions, and gritty textures updated daily on our official feed.</p>
+        <a href="https://www.instagram.com/tony_photography.wed?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="insta-btn" target="_blank" rel="noopener">View on Instagram</a>
+        <a href="https://www.instagram.com/tony_photography.wed" class="insta-handle" target="_blank" rel="noopener">@tony_photography.wed</a>
+    </div>
+</section>
+
+<section id="gallery">
+    <h2 class="section-title" style="text-align:center;">My <span class="accent">Gallery</span></h2>
+    <div class="gallery-grid">
+        <div class="gallery-item"><img src="img1.jpg" alt="Gallery 1" loading="lazy"></div>
+        <div class="gallery-item"><img src="img2.jpg" alt="Gallery 2" loading="lazy"></div>
+        <div class="gallery-item"><img src="img3.jpg" alt="Gallery 3" loading="lazy"></div>
+        <div class="gallery-item"><img src="img4.jpg" alt="Gallery 4" loading="lazy"></div>
+        <div class="gallery-item"><img src="img5.jpg" alt="Gallery 5" loading="lazy"></div>
+        <div class="gallery-item"><img src="img6.jpg" alt="Gallery 6" loading="lazy"></div>
+        <div class="gallery-item"><img src="img7.jpg" alt="Gallery 7" loading="lazy"></div>
+        <div class="gallery-item"><img src="img8.jpg" alt="Gallery 8" loading="lazy"></div>
+        <div class="gallery-item"><img src="img9.jpg" alt="Gallery 9" loading="lazy"></div>
+    </div>
+</section>
+
+<section id="custom-package">
+    <div style="text-align:center; max-width: 920px; margin: 0 auto 56px;">
+        <span class="section-label">Tailored Booking</span>
+        <h2 class="section-title">CUSTOMIZE YOUR <span class="accent">PACKAGE</span></h2>
+        <p style="color:var(--w60); line-height:1.9; max-width:700px; margin:0 auto;">Build a shoot plan that fits your event, your style, and your budget. Share the essentials below and we'll shape a cinematic package made just for you.</p>
+    </div>
+
+    <div class="package-shell">
+        <div class="package-copy reveal">
+            <span class="pill" style="margin-bottom:20px; display:inline-block;">Flexible Packages</span>
+            <h3 style="font-family:'Bebas Neue', sans-serif; font-size:3.2rem; line-height:0.95; letter-spacing:1px; margin-bottom:22px;">FROM INTIMATE STORIES TO GRAND PRODUCTIONS</h3>
+            <p>Whether you're planning a wedding, a birthday, a brand launch, or a full event film, we can combine photo coverage, reels, teaser edits, highlight films, albums, and fast delivery into one custom quote.</p>
+
+            <div class="package-points">
+                <div class="package-point">
+                    <strong>Choose Your Event Type</strong>
+                    <span>Weddings, pre-wedding shoots, birthdays, corporate launches, portraits, and more.</span>
+                </div>
+                <div class="package-point">
+                    <strong>Add the Deliverables You Need</strong>
+                    <span>Short reels, full highlight films, candid coverage, drone shots, premium albums, and same-week delivery.</span>
+                </div>
+                <div class="package-point">
+                    <strong>Get a Fast Response</strong>
+                    <span>Once you send your details, we can follow up with a tailored recommendation and a direct booking plan.</span>
+                </div>
+            </div>
+
+            <div class="package-mini-stats">
+                <div class="package-stat"><strong>24h</strong><span>Quick Reply</span></div>
+                <div class="package-stat"><strong>100%</strong><span>Tailored Quote</span></div>
+                <div class="package-stat"><strong>1:1</strong><span>Creative Planning</span></div>
+            </div>
+        </div>
+
+        <div class="package-form-card reveal">
+            <div class="package-topline">
+                <h3>Tell Us What You Need</h3>
+                <span>Custom Form</span>
+            </div>
+
+            <form class="package-form" id="custom-package-form">
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="name">Your Name</label>
+                        <input id="name" name="name" type="text" placeholder="Enter your name">
+                    </div>
+                    <div class="field">
+                        <label for="phone">Phone / WhatsApp</label>
+                        <input id="phone" name="phone" type="tel" placeholder="+91 98XXXXXXXX">
+                    </div>
+                    <div class="field">
+                        <label for="event-type">Event Type</label>
+                        <select id="event-type" name="event-type">
+                            <option>Wedding</option>
+                            <option>Pre-Wedding</option>
+                            <option>Birthday</option>
+                            <option>Corporate Event</option>
+                            <option>Brand Shoot</option>
+                            <option>Portrait Session</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="event-date">Event Date</label>
+                        <input id="event-date" name="event-date" type="date">
+                    </div>
+                    <div class="field">
+                        <label for="location">Location</label>
+                        <input id="location" name="location" type="text" placeholder="Hyderabad, Mumbai, Delhi...">
+                    </div>
+                    <div class="field">
+                        <label for="coverage-hours">Coverage Needed</label>
+                        <select id="coverage-hours" name="coverage-hours">
+                            <option>2-4 Hours</option>
+                            <option>Half Day</option>
+                            <option>Full Day</option>
+                            <option>2 Days</option>
+                            <option>Multi-Day Event</option>
+                        </select>
+                    </div>
+                    <div class="field field-full">
+                        <label>Budget Range</label>
+                        <div class="budget-options">
+                            <label class="budget-option"><input type="radio" name="budget" value="Below 25K" checked><span>Below 25K</span></label>
+                            <label class="budget-option"><input type="radio" name="budget" value="25K - 75K"><span>25K - 75K</span></label>
+                            <label class="budget-option"><input type="radio" name="budget" value="75K+"><span>75K+</span></label>
+                        </div>
+                    </div>
+                    <div class="field field-full">
+                        <label for="details">Package Details</label>
+                        <textarea id="details" name="details" placeholder="Tell us what you want in your package: photos, reels, drone shots, albums, teaser video, candid team, fast delivery, etc."></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="package-submit">Request Custom Package</button>
+                <p class="package-note">When this button is clicked, WhatsApp opens with all entered package details pre-typed in the message.</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="terms-conditions">
+    <div class="terms-panel reveal">
+        <span class="section-label">Booking Policy</span>
+        <h2 class="section-title">TERMS & <span class="accent">CONDITIONS</span></h2>
+        <p class="terms-intro">Please review these terms before confirming your booking. They apply to custom package requests, photography sessions, videography coverage, event films, and related creative services provided by Tony Photography.</p>
+
+        <div class="terms-grid">
+            <div class="term-card">
+                <h3>Booking Confirmation</h3>
+                <p>Your booking is confirmed only after date availability is approved and the agreed advance payment is received. Until then, the requested slot remains open.</p>
+            </div>
+            <div class="term-card">
+                <h3>Pricing & Custom Quotes</h3>
+                <p>Package pricing depends on event type, hours of coverage, travel, crew size, edit scope, and add-ons. Final pricing is confirmed after discussion and approval.</p>
+            </div>
+            <div class="term-card">
+                <h3>Travel & Extra Charges</h3>
+                <p>Travel, accommodation, special permissions, venue restrictions, and extended shoot hours may involve additional charges whenever applicable.</p>
+            </div>
+            <div class="term-card">
+                <h3>Deliverables</h3>
+                <p>Deliverables may include photos, reels, teaser videos, films, albums, and drone coverage based on the selected package. Raw files are not included unless agreed in writing.</p>
+            </div>
+            <div class="term-card">
+                <h3>Delivery Timeline</h3>
+                <p>Delivery time depends on event scale and post-production requirements. Priority or express delivery must be requested before booking and may include extra cost.</p>
+            </div>
+            <div class="term-card">
+                <h3>Cancellation & Rescheduling</h3>
+                <p>Cancellations or date changes should be shared as early as possible. Advance payments may be non-refundable, and rescheduling depends on availability.</p>
+            </div>
+            <div class="term-card">
+                <h3>Client Responsibilities</h3>
+                <p>The client must provide correct event details, timing, location access, permissions, and important moments to capture. Missing information can affect coverage quality.</p>
+            </div>
+            <div class="term-card">
+                <h3>Communication Consent</h3>
+                <p>By submitting the package form, you agree to be contacted by WhatsApp or phone regarding your inquiry, quotation, and booking follow-up.</p>
+            </div>
+        </div>
+
+        <p class="terms-endnote">If you need custom commercial rights, confidential event coverage, or special contract terms, these can be discussed before final booking confirmation.</p>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img src="logo1.PNG" alt="Tony Photography">
+            <p>Creating cinematic memories across India. Every frame tells a story worth remembering, crafted with passion, precision and purpose.</p>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/tony_photography.wed" class="social-btn" target="_blank" rel="noopener" title="Instagram">📷</a>
+                <a href="https://wa.me/919989920100" class="social-btn" target="_blank" rel="noopener" title="WhatsApp">💬</a>
+                <a href="mailto:tony@photography.com" class="social-btn" title="Email">✉</a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navigate</h4>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#founder">Founder</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+                <li><a href="#coverage">Weddings</a></li>
+                <li><a href="#coverage">Brand Shoots</a></li>
+                <li><a href="#coverage">Events</a></li>
+                <li><a href="#coverage">Portraits</a></li>
+                <li><a href="https://wa.me/919989920100">Book Now</a></li>
+            </ul>
+        </div>
+    </div>
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="footer-bottom">
+            <p>© 2025 Tony Photography. All rights reserved. <a href="https://wa.me/919989920100">+91 99899 20100</a></p>
+            <div class="made-with">Made with <span class="heart">♥</span> in Hyderabad</div>
+        </div>
+    </div>
+</footer>
+
+<a href="https://wa.me/919989920100" class="mobile-sticky-wa" target="_blank" rel="noopener" aria-label="Book on WhatsApp">
+    <span class="icon">💬</span>
+    <span class="text">Book on WhatsApp<small>Quick Inquiry</small></span>
+</a>
+
+<script>
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function animCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    dot.style.cssText = `left:${mx}px;top:${my}px`;
+    ring.style.cssText = `left:${rx}px;top:${ry}px`;
+    requestAnimationFrame(animCursor);
+})();
+
+document.querySelectorAll('a,button,.why-card,.cov-card,.testi-card,.gallery-item,.package-point,.budget-option span').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        ring.style.width = '56px';
+        ring.style.height = '56px';
+        ring.style.borderColor = 'rgba(168,255,120,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+        ring.style.width = '36px';
+        ring.style.height = '36px';
+        ring.style.borderColor = 'rgba(168,255,120,0.5)';
+    });
+});
+
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, pts = [];
+function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+for (let i = 0; i < 80; i++) {
+    pts.push({
+        x: Math.random() * innerWidth,
+        y: Math.random() * innerHeight,
+        r: Math.random() * 1.4 + 0.3,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: (Math.random() - 0.5) * 0.22,
+        a: Math.random() * 0.45 + 0.08
+    });
+}
+(function drawPts() {
+    ctx.clearRect(0, 0, W, H);
+    pts.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = W;
+        if (p.x > W) p.x = 0;
+        if (p.y < 0) p.y = H;
+        if (p.y > H) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168,255,120,${p.a})`;
+        ctx.fill();
+    });
+    for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+            const dx = pts[i].x - pts[j].x;
+            const dy = pts[i].y - pts[j].y;
+            const d = Math.hypot(dx, dy);
+            if (d < 100) {
+                ctx.beginPath();
+                ctx.moveTo(pts[i].x, pts[i].y);
+                ctx.lineTo(pts[j].x, pts[j].y);
+                ctx.strokeStyle = `rgba(168,255,120,${0.055 * (1 - d / 100)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+    requestAnimationFrame(drawPts);
+})();
+
+const hdr = document.getElementById('site-header');
+window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40));
+
+const navLinks = document.querySelectorAll('.desktop-nav a');
+const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.desktop-nav a[href="#${entry.target.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    });
+}, { threshold: 0.35 });
+document.querySelectorAll('section[id],main[id]').forEach(section => sectionObserver.observe(section));
+
+const ham = document.getElementById('hamburger');
+const mob = document.getElementById('mobileNav');
+ham.addEventListener('click', () => {
+    ham.classList.toggle('open');
+    mob.classList.toggle('active');
+});
+mob.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+    ham.classList.remove('open');
+    mob.classList.remove('active');
+}));
+
+const revObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+            entry.target.style.transitionDelay = `${siblings.indexOf(entry.target) * 110}ms`;
+            entry.target.classList.add('visible');
+            revObs.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+function counter(el, target) {
+    let start = 0;
+    const duration = 1800;
+    const step = ts => {
+        if (!start) start = ts;
+        const progress = Math.min((ts - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(ease * target) + '+';
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        } else {
+            el.textContent = target + '+';
+        }
+    };
+    requestAnimationFrame(step);
+}
+
+const statObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+            const el = entry.target.querySelector('.stat-num');
+            counter(el, +el.dataset.target);
+            entry.target.dataset.counted = '1';
+        }
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-item').forEach(stat => statObs.observe(stat));
+
+const packageForm = document.getElementById('custom-package-form');
+if (packageForm) {
+    packageForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const getValue = id => {
+            const field = document.getElementById(id);
+            return field && field.value.trim() ? field.value.trim() : 'Not provided';
+        };
+
+        const budgetField = packageForm.querySelector('input[name="budget"]:checked');
+        const budget = budgetField ? budgetField.value : 'Not provided';
+
+        const messageLines = [
+            'Hello Tony, I want to customize my package.',
+            '',
+            '*Custom Package Request*',
+            `Name: ${getValue('name')}`,
+            `Phone / WhatsApp: ${getValue('phone')}`,
+            `Event Type: ${getValue('event-type')}`,
+            `Event Date: ${getValue('event-date')}`,
+            `Location: ${getValue('location')}`,
+            `Coverage Needed: ${getValue('coverage-hours')}`,
+            `Budget Range: ${budget}`,
+            `Package Details: ${getValue('details')}`
+        ];
+
+        const whatsappNumber = '919989920100';
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(messageLines.join('\n'))}`;
+        window.open(whatsappUrl, '_blank', 'noopener');
+    });
+}
+</script>
+</body>
+</html>
