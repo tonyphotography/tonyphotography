@@ -677,15 +677,16 @@ new IntersectionObserver(entries=>{
 </script>
 <script>
 function encodeMsg(text) {
-  const phone = "919989920100"; // change your number if needed
+  const phone = "919989920100";
   return "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
 }
-</script>
-    <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
 (function packageBuilder() {
   const state = {
-    event:    { name: 'Wedding',       price: 15000 },
-    services: [{ name: 'Photography',  price: 0 }],
+    event:    { name: 'Wedding', price: 15000 },
+    services: [{ name: 'Photography', price: 0 }],
     addons:   [],
     duration: 4,
   };
@@ -762,11 +763,14 @@ function encodeMsg(text) {
       `• Estimated Total: ${fmt(total())}\n\n` +
       `Please confirm availability and next steps. 🙏`;
 
-    window.open(encodeMsg(msg), '_blank', 'noopener');
+    window.open(encodeMsg(msg), '_blank');
   });
 
   updateSummary();
 })();
+
+});
+</script>
 </script>
 </section>
 
