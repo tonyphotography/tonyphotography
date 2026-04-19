@@ -675,77 +675,99 @@ new IntersectionObserver(entries=>{
     new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting && !e.target.dataset.counted){ const el=e.target.querySelector('.stat-num'); counter(el,+el.dataset.target); e.target.dataset.counted='1'; } }); },{threshold:.5}).observe(s)
 );
 </script>
-   <!-- PACKAGE BUILDER -->
-<section id="packages" aria-labelledby="pkg-title">
-  <div style="text-align:center;">
-    <span class="section-label">Tailored For You</span>
-    <h2 class="section-title" id="pkg-title">BUILD YOUR <span class="accent">PACKAGE</span></h2>
-    <p style="max-width:680px;margin:0 auto 60px;color:var(--w60);line-height:1.8;">Pick your event type, services, and add-ons — get an instant quote and send it straight to WhatsApp.</p>
-  </div>
-  <div class="pkg-builder">
-    <div class="pkg-left">
-      <!-- Event Type -->
-      <div class="pkg-group">
-        <div class="pkg-group-title">Event Type</div>
-        <div class="pkg-options" id="event-types">
-          <label class="pkg-option is-selected" data-price="15000"><input type="radio" name="event" value="Wedding" checked><div class="opt-text"><span class="opt-name">Wedding</span><span class="opt-price">From ₹15,000</span></div></label>
-          <label class="pkg-option" data-price="8000"><input type="radio" name="event" value="Birthday"><div class="opt-text"><span class="opt-name">Birthday</span><span class="opt-price">From ₹8,000</span></div></label>
-          <label class="pkg-option" data-price="12000"><input type="radio" name="event" value="Corporate"><div class="opt-text"><span class="opt-name">Corporate</span><span class="opt-price">From ₹12,000</span></div></label>
-          <label class="pkg-option" data-price="10000"><input type="radio" name="event" value="Engagement"><div class="opt-text"><span class="opt-name">Engagement</span><span class="opt-price">From ₹10,000</span></div></label>
-          <label class="pkg-option" data-price="11000"><input type="radio" name="event" value="Brand Shoot"><div class="opt-text"><span class="opt-name">Brand Shoot</span><span class="opt-price">From ₹11,000</span></div></label>
-          <label class="pkg-option" data-price="9000"><input type="radio" name="event" value="Portraits"><div class="opt-text"><span class="opt-name">Portraits</span><span class="opt-price">From ₹9,000</span></div></label>
-        </div>
-      </div>
+<script>
+function encodeMsg(text) {
+  const phone = "919989920100"; // change your number if needed
+  return "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
+}
+</script>
+    <script>
+(function packageBuilder() {
+  const state = {
+    event:    { name: 'Wedding',       price: 15000 },
+    services: [{ name: 'Photography',  price: 0 }],
+    addons:   [],
+    duration: 4,
+  };
 
-      <!-- Services -->
-      <div class="pkg-group">
-        <div class="pkg-group-title">Services</div>
-        <div class="pkg-options" id="services">
-          <label class="pkg-option is-selected is-locked" data-price="0" title="Always included"><input type="checkbox" value="Photography" checked disabled><div class="opt-text"><span class="opt-name">Photography</span><span class="opt-price">Included</span></div></label>
-          <label class="pkg-option" data-price="5000"><input type="checkbox" value="Videography"><div class="opt-text"><span class="opt-name">Videography</span><span class="opt-price">+₹5,000</span></div></label>
-          <label class="pkg-option" data-price="3000"><input type="checkbox" value="Drone"><div class="opt-text"><span class="opt-name">Drone Shots</span><span class="opt-price">+₹3,000</span></div></label>
-          <label class="pkg-option" data-price="4000"><input type="checkbox" value="Highlight Reel"><div class="opt-text"><span class="opt-name">Highlight Reel</span><span class="opt-price">+₹4,000</span></div></label>
-          <label class="pkg-option" data-price="2500"><input type="checkbox" value="Candids"><div class="opt-text"><span class="opt-name">Candid Coverage</span><span class="opt-price">+₹2,500</span></div></label>
-        </div>
-      </div>
+  const total = () => {
+    const extra = Math.max(0, state.duration - 4) * 1500;
+    return state.event.price
+      + state.services.reduce((s, x) => s + x.price, 0)
+      + state.addons.reduce((s, x) => s + x.price, 0)
+      + extra;
+  };
 
-      <!-- Add-ons -->
-      <div class="pkg-group">
-        <div class="pkg-group-title">Add-Ons</div>
-        <div class="pkg-options" id="addons">
-          <label class="pkg-option" data-price="3500"><input type="checkbox" value="Next-Day Delivery"><div class="opt-text"><span class="opt-name">Next-Day Delivery</span><span class="opt-price">+₹3,500</span></div></label>
-          <label class="pkg-option" data-price="2000"><input type="checkbox" value="Privacy Package"><div class="opt-text"><span class="opt-name">Privacy Package</span><span class="opt-price">+₹2,000</span></div></label>
-          <label class="pkg-option" data-price="1500"><input type="checkbox" value="Print Album"><div class="opt-text"><span class="opt-name">Print Album</span><span class="opt-price">+₹1,500</span></div></label>
-          <label class="pkg-option" data-price="1000"><input type="checkbox" value="Extra Revisions"><div class="opt-text"><span class="opt-name">Extra Revisions</span><span class="opt-price">+₹1,000</span></div></label>
-        </div>
-      </div>
+  const fmt = n => '₹' + n.toLocaleString('en-IN');
 
-      <!-- Duration -->
-      <div class="pkg-group">
-        <div class="pkg-group-title">Coverage Duration</div>
-        <div class="duration-display"><strong id="dur-val">4</strong><span>hours</span></div>
-        <div style="margin-top:12px;">
-          <input type="range" class="duration-slider" id="dur-slider" min="2" max="12" value="4" step="1" aria-label="Coverage duration in hours">
-          <div class="duration-labels"><span>2 hrs</span><span>6 hrs</span><span>12 hrs</span></div>
-        </div>
-        <p style="margin-top:10px;font-size:.75rem;color:var(--w60);">First 4 hours included · ₹1,500/hr thereafter</p>
-      </div>
-    </div>
+  const updateSummary = () => {
+    document.getElementById('s-event').textContent    = state.event.name;
+    document.getElementById('s-dur').textContent      = state.duration + ' hours';
+    document.getElementById('s-services').textContent = state.services.map(x => x.name).join(', ') || 'None';
+    document.getElementById('s-addons').textContent   = state.addons.map(x => x.name).join(', ')   || 'None';
+    document.getElementById('s-total').textContent    = fmt(total());
+  };
 
-    <!-- Summary Panel -->
-    <aside class="pkg-summary" aria-label="Package quote summary">
-      <h3>Your Quote</h3>
-      <div class="summary-line"><span class="s-label">Event</span><span class="s-val" id="s-event">Wedding</span></div>
-      <div class="summary-line"><span class="s-label">Duration</span><span class="s-val" id="s-dur">4 hours</span></div>
-      <div class="summary-line"><span class="s-label">Services</span><span class="s-val" id="s-services">Photography</span></div>
-      <div class="summary-line"><span class="s-label">Add-Ons</span><span class="s-val" id="s-addons">None</span></div>
-      <div class="summary-line total"><span class="s-label">Estimated Total</span><span class="s-val" id="s-total">₹15,000</span></div>
-      <p class="pkg-note">Prices are estimates. Final quote sent after consultation.<br><a href="#" class="js-terms">View Terms & Conditions →</a></p>
-      <button class="btn-wa" id="pkg-send">
-        <span aria-hidden="true">💬</span> Send via WhatsApp
-      </button>
-    </aside>
-  </div>
+  document.querySelectorAll('#event-types .pkg-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('#event-types .pkg-option').forEach(o => o.classList.remove('is-selected'));
+      opt.classList.add('is-selected');
+      opt.querySelector('input').checked = true;
+      state.event = { name: opt.querySelector('input').value, price: +opt.dataset.price };
+      updateSummary();
+    });
+  });
+
+  document.querySelectorAll('#services .pkg-option:not(.is-locked)').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const cb = opt.querySelector('input');
+      cb.checked = !cb.checked;
+      opt.classList.toggle('is-selected', cb.checked);
+      const key = cb.value;
+      if (cb.checked) { state.services.push({ name: key, price: +opt.dataset.price }); }
+      else            { state.services = state.services.filter(x => x.name !== key); }
+      updateSummary();
+    });
+  });
+
+  document.querySelectorAll('#addons .pkg-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const cb = opt.querySelector('input');
+      cb.checked = !cb.checked;
+      opt.classList.toggle('is-selected', cb.checked);
+      const key = cb.value;
+      if (cb.checked) { state.addons.push({ name: key, price: +opt.dataset.price }); }
+      else            { state.addons = state.addons.filter(x => x.name !== key); }
+      updateSummary();
+    });
+  });
+
+  const slider = document.getElementById('dur-slider');
+  slider.addEventListener('input', () => {
+    state.duration = +slider.value;
+    document.getElementById('dur-val').textContent = state.duration;
+    const pct = ((state.duration - 2) / (12 - 2)) * 100;
+    slider.style.setProperty('--pct', pct + '%');
+    updateSummary();
+  });
+
+  document.getElementById('pkg-send').addEventListener('click', () => {
+    const msg =
+      `Hi Tony! 👋 I've built a custom package and would like to book.\n\n` +
+      `📋 *Package Details:*\n` +
+      `• Event Type: ${state.event.name}\n` +
+      `• Duration: ${state.duration} hours\n` +
+      `• Services: ${state.services.map(x => x.name).join(', ')}\n` +
+      `• Add-Ons: ${state.addons.map(x => x.name).join(', ') || 'None'}\n` +
+      `• Estimated Total: ${fmt(total())}\n\n` +
+      `Please confirm availability and next steps. 🙏`;
+
+    window.open(encodeMsg(msg), '_blank', 'noopener');
+  });
+
+  updateSummary();
+})();
+</script>
 </section>
 
 </body>
