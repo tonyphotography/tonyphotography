@@ -213,7 +213,7 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: rgba(1
    MARQUEE
 ═══════════════════════════════════════════════════ */
 .marquee-wrap { overflow: hidden; background: var(--glow); padding: 14px 0; position: relative; z-index: 5; margin-top: 84px; }
-.marquee-track { display: flex; animation: marquee 32s linear infinite; width: max-content; }
+.marquee-track { display: flex; animation: marquee 60s linear infinite; width: max-content; }
 .marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 .marquee-track span     { color: #0a1408; font-weight: 900; font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; padding: 0 40px; white-space: nowrap; }
 .marquee-track .dot     { padding: 0; opacity: .4; font-size: 1rem; }
@@ -487,7 +487,7 @@ section { padding: 110px 5%; }
 }
 .testi-track-wrap::before { left:  0; background: linear-gradient(to right, var(--bg-deep), transparent); }
 .testi-track-wrap::after  { right: 0; background: linear-gradient(to left,  var(--bg-deep), transparent); }
-.testi-track { display: flex; gap: 24px; animation: testiScroll 80s linear infinite; width: max-content; }
+.testi-track { display: flex; gap: 24px; animation: testiScroll 140s linear infinite; width: max-content; }
 .testi-track:hover { animation-play-state: paused; }
 @keyframes testiScroll { to { transform: translateX(-50%); } }
 
