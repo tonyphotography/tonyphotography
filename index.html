@@ -813,5 +813,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
   <button id="pkg-send">Send to WhatsApp</button>
 </section>
+    <!-- PACKAGE BUILDER -->
+<section id="packages" style="padding:100px 5%; text-align:center;">
+
+  <h2 style="font-family:'Bebas Neue'; font-size:48px; letter-spacing:2px;">
+    BUILD YOUR <span style="color:#a8ff78;">PACKAGE</span>
+  </h2>
+
+  <div style="max-width:500px;margin:40px auto;padding:40px;border-radius:30px;
+  background: rgba(255,255,255,0.05);backdrop-filter: blur(20px);
+  border:1px solid rgba(168,255,120,0.2);box-shadow:0 0 40px rgba(168,255,120,0.1);">
+
+    <div id="event-types">
+      <label class="pkg-option" data-price="15000">
+        <input type="radio" name="event" value="Wedding" checked> Wedding
+      </label><br>
+      <label class="pkg-option" data-price="8000">
+        <input type="radio" name="event" value="Birthday"> Birthday
+      </label>
+    </div>
+
+    <br>
+
+    <div id="services">
+      <label class="pkg-option is-locked" data-price="0">
+        <input type="checkbox" value="Photography" checked disabled> Photography
+      </label><br>
+      <label class="pkg-option" data-price="5000">
+        <input type="checkbox" value="Videography"> Videography
+      </label>
+    </div>
+
+    <br>
+
+    <div id="addons">
+      <label class="pkg-option" data-price="2000">
+        <input type="checkbox" value="Drone"> Drone
+      </label>
+    </div>
+
+    <br>
+
+    <input type="range" id="dur-slider" min="2" max="12" value="4" style="width:100%;">
+    <p><strong id="dur-val">4</strong> hours</p>
+
+    <h3>Summary</h3>
+    <p>Event: <span id="s-event"></span></p>
+    <p>Duration: <span id="s-dur"></span></p>
+    <p>Services: <span id="s-services"></span></p>
+    <p>Addons: <span id="s-addons"></span></p>
+
+    <h2 style="color:#a8ff78;">Total: <span id="s-total"></span></h2>
+
+    <button id="pkg-send" style="padding:12px 25px;border:none;border-radius:30px;
+    background:#a8ff78;color:black;font-weight:bold;">
+      Send to WhatsApp
+    </button>
+
+  </div>
+</section>
 </body>
 </html>
